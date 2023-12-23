@@ -1,0 +1,215 @@
+/* Colors */
+:root {
+    --MainColor: #ad974f;
+    --HoverColor: #8E793E;
+    --DarkGrey: #231F20;
+    --DirtyWhite: #EAEAEA;
+    --whiteColor: #ffffff;
+    --blackColor: #2e2e2e;
+    --textColor: #9f9f92;
+    --whiteColor2: #ededed;
+    --greyBG: #231F20;
+    --greyText: #bfbfbf;
+    --inputColor: #f8f6f7;
+}
+
+.Logo {
+    width: 20%;
+    height: auto;
+}
+
+.navBarSection {
+    .header {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--greyBG);
+        width: 100%;
+        padding: 1rem;
+        z-index: 1000;
+
+        @media screen and (max-width: 768px) {
+            .Logo {
+                width: 30%;
+                height: auto;
+                margin: -0.5rem 0 -0.7rem;
+            }
+            .navBar {
+                background: var(--greyBG);
+                position: absolute;
+                height: max-content;
+                padding: 1rem;
+                width: 100%;
+                top: 0;
+                left: -500%;
+                box-shadow: 0 2px 4px rgba(61, 61, 61, 0.904);
+                transition: .5s ease;
+                z-index: 1000;
+
+                .navLists {
+                    flex-direction: column;
+                    justify-content: center;
+                    width: 100%;
+                    margin: auto;
+                    padding-bottom: 1rem;
+
+                    .navItem {
+                        padding: 1rem 0;
+
+                        .navLink {
+                            color: var(--textColor);
+                            font-size: .9rem;
+                            font-weight: 600;
+                            &:hover {
+                                color: var(--MainColor);
+                            }
+                        }
+                    }
+
+                    .headerBtns {
+                        flex-direction: column;
+                        .btn {
+                            margin-top: 1rem;
+
+                            a {
+                                font-weight: 600;
+
+                                &:hover {
+                                    color: var(--whiteColor);
+                                }
+                            }
+                        }
+
+                        .loginBtn {
+                            background: none;
+                            border: 1px solid var(--MainColor);
+
+                            a {
+                                color: var(--MainColor);
+                            }
+
+                            &:hover {
+                                background: var(--HoverColor);
+                                a {
+                                    color: var(--whiteColor);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .closeNavbar {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    color:var(--MainColor);
+                    &:hover .icon {
+                        color: var(--HoverColor);
+                    }
+                }
+            }
+        
+            .activeNavbar{
+                left: 0;
+            }
+
+            .toggleNavbar {
+                color: #9f9f92;
+            }
+
+            .griddots {
+                font-size: 1.5rem;
+            }
+        }
+
+        .toggleNavbar {
+            .icon {
+                font-size: 25px;
+                color: var(--whiteColor);
+                &:hover {
+                    color: var(--MainColor);
+                }
+            }
+        }
+    }
+
+    .activeHeader {
+        // background: var(--greyBG);
+        background: #181818;
+        box-shadow: 0 2px 8px 2px rgba(61, 61, 61, 0.45);
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .navBarSection {
+        .toggleNavbar, .closeNavbar {
+            display: none;
+        }
+
+        .header {
+            padding: .7rem 2rem;
+
+            .navBar {
+                .navLists {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: row;
+
+                    .navItem {
+                        .navLink {
+                            color: var(--whiteColor);
+                            padding: 0 .45rem;
+                            font-size: .9rem;
+                            font-weight: 400;
+
+                            &:hover{
+                                color: var(--MainColor);
+                            }
+                        }
+                    }
+                }
+
+                .btn {
+                    margin-left: 1rem;
+
+                    a {
+                        color: var(--whiteColor);
+                        font-weight: 500;
+                    }
+                }
+
+                .loginBtn {
+                    background: none;
+                    border: 1px solid var(--MainColor);
+
+                    &:hover {
+                        background: var(--MainColor);
+                        a {
+                            color: var(--whiteColor);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .header {
+        .navBar {
+            .navLists {
+                .navItem {
+                    padding: 0 .7rem;
+                }
+            }
+        }
+    }
+}
+
+// @media screen and (min-width: 1024px) {
+//     .header {
+//         // padding: 1rem 8.5rem !important;
+//     }
+// }

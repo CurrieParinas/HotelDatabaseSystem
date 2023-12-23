@@ -1,0 +1,144 @@
+/* Colors */
+:root {
+    --MainColor: #ad974f;
+    --HoverColor: #8E793E;
+    --DarkGrey: #231F20;
+    --DirtyWhite: #EAEAEA;
+    --whiteColor: #ffffff;
+    --blackColor: #2e2e2e;
+    --textColor: #9f9f92;
+    --whiteColor2: #ededed;
+    --greyBG: #231F20;
+    --greyText: #bfbfbf;
+    --inputColor: #f8f6f7;
+}
+
+.offer {
+    .secContainer {
+        .mainContent {
+            gap: 1rem;
+
+            .singleOffer {
+                border-radius: 1rem;
+                overflow: hidden;
+                padding: .5rem;
+                box-shadow: 0 2px 8px 2px rgba(49, 49, 49, 0.189);
+
+                .icon {
+                    font-size: 20px;
+                    color: var(--textColor);
+                }
+
+                small {
+                    font-weight: 500;
+                }
+
+                .roomImage {
+                    position: relative;
+                    height: 200px;
+                    width: 100%;
+                    border-radius: 1rem;
+                    overflow: hidden;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+
+                    .discount {
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        padding: 5px 10px;
+                        background: var(--MainColor);
+                        color: var(--whiteColor);
+                        border-radius: 3rem;
+                        font-size: 10px;
+                        font-weight: 500;
+                    }
+                }
+
+                .offerBody {
+                    padding: 1rem;
+                    margin-bottom: -1rem;
+                    .price {
+                        justify-content: space-between;
+                        h4{
+                            color: var(--blackColor);
+                            font-weight: 700;
+                            font-size: 1.1rem;
+                        }
+
+                        .status {
+                            padding: 5px 10px;
+                            color: var(--MainColor);
+                            background: var(--greyBG);
+                            font-size: 10px;
+                            font-weight: 600;
+                            border-radius: 3rem;
+                        }
+                    }
+
+                    .amenities {
+                        width: 100%;
+                        flex-wrap: wrap;
+                        justify-content: flex-start;
+                        padding: 1rem 0;
+                        gap: .5rem;
+
+                        .singleAmenity {
+                            padding: 5px 10px;
+                            border-radius: 5px;
+                            background: var(--greyText);
+                            gap: .5rem;
+                            .icon {
+                                color: var(--greyBG);
+                            }
+                        }
+
+                        .roomType{
+                            margin-top: .5rem;
+                            .icon {
+                                color: var(--DarkGrey);
+                                font-size: 30px;
+                                margin-right: .5rem;
+                            }
+                        }
+
+                        .btn {
+                            margin-top: .5rem;
+                            width: 100%;
+                            text-align: center;
+                            justify-content: center;
+                            padding: .6rem;
+                            color: var(--whiteColor);
+                            font-weight: 600;
+                            gap: 0.5rem;
+
+                            .icon {
+                                color: var(--whiteColor);
+                            }
+                            &:hover {
+                                background: var(--HoverColor);
+                                p {
+                                    color: var(--whiteColor);
+                                }
+                            }
+                        }
+                    }
+                }
+                &:hover {
+                    transform: translateY(-10px);
+                    transition: .1s ease-in-out;
+                }
+            }
+        }
+    }
+}
+
+@media screen  and (min-width: 884px) {
+    .offerContent {
+        grid-template-columns: repeat(4,1fr);
+    }
+    
+}
