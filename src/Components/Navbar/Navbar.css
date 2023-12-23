@@ -1,0 +1,167 @@
+/* Colors */
+:root {
+  --MainColor: #ad974f;
+  --HoverColor: #8E793E;
+  --DarkGrey: #231F20;
+  --DirtyWhite: #EAEAEA;
+  --whiteColor: #ffffff;
+  --blackColor: #2e2e2e;
+  --textColor: #9f9f92;
+  --whiteColor2: #ededed;
+  --greyBG: #231F20;
+  --greyText: #bfbfbf;
+  --inputColor: #f8f6f7;
+}
+
+.Logo {
+  width: 20%;
+  height: auto;
+}
+
+.navBarSection .header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--greyBG);
+  width: 100%;
+  padding: 1rem;
+  z-index: 1000;
+}
+@media screen and (max-width: 768px) {
+  .navBarSection .header .Logo {
+    width: 30%;
+    height: auto;
+    margin: -0.5rem 0 -0.7rem;
+  }
+  .navBarSection .header .navBar {
+    background: var(--greyBG);
+    position: absolute;
+    height: max-content;
+    padding: 1rem;
+    width: 100%;
+    top: 0;
+    left: -500%;
+    box-shadow: 0 2px 4px rgba(61, 61, 61, 0.904);
+    transition: 0.5s ease;
+    z-index: 1000;
+  }
+  .navBarSection .header .navBar .navLists {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    padding-bottom: 1rem;
+  }
+  .navBarSection .header .navBar .navLists .navItem {
+    padding: 1rem 0;
+  }
+  .navBarSection .header .navBar .navLists .navItem .navLink {
+    color: var(--textColor);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .navBarSection .header .navBar .navLists .navItem .navLink:hover {
+    color: var(--MainColor);
+  }
+  .navBarSection .header .navBar .navLists .headerBtns {
+    flex-direction: column;
+  }
+  .navBarSection .header .navBar .navLists .headerBtns .btn {
+    margin-top: 1rem;
+  }
+  .navBarSection .header .navBar .navLists .headerBtns .btn a {
+    font-weight: 600;
+  }
+  .navBarSection .header .navBar .navLists .headerBtns .btn a:hover {
+    color: var(--whiteColor);
+  }
+  .navBarSection .header .navBar .navLists .headerBtns .loginBtn {
+    background: none;
+    border: 1px solid var(--MainColor);
+  }
+  .navBarSection .header .navBar .navLists .headerBtns .loginBtn a {
+    color: var(--MainColor);
+  }
+  .navBarSection .header .navBar .navLists .headerBtns .loginBtn:hover {
+    background: var(--HoverColor);
+  }
+  .navBarSection .header .navBar .navLists .headerBtns .loginBtn:hover a {
+    color: var(--whiteColor);
+  }
+  .navBarSection .header .navBar .closeNavbar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--MainColor);
+  }
+  .navBarSection .header .navBar .closeNavbar:hover .icon {
+    color: var(--HoverColor);
+  }
+  .navBarSection .header .activeNavbar {
+    left: 0;
+  }
+  .navBarSection .header .toggleNavbar {
+    color: #9f9f92;
+  }
+  .navBarSection .header .griddots {
+    font-size: 1.5rem;
+  }
+}
+.navBarSection .header .toggleNavbar .icon {
+  font-size: 25px;
+  color: var(--whiteColor);
+}
+.navBarSection .header .toggleNavbar .icon:hover {
+  color: var(--MainColor);
+}
+.navBarSection .activeHeader {
+  background: #181818;
+  box-shadow: 0 2px 8px 2px rgba(61, 61, 61, 0.45);
+}
+
+@media screen and (min-width: 769px) {
+  .navBarSection .toggleNavbar, .navBarSection .closeNavbar {
+    display: none;
+  }
+  .navBarSection .header {
+    padding: 0.7rem 2rem;
+  }
+  .navBarSection .header .navBar .navLists {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+  .navBarSection .header .navBar .navLists .navItem .navLink {
+    color: var(--whiteColor);
+    padding: 0 0.45rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+  .navBarSection .header .navBar .navLists .navItem .navLink:hover {
+    color: var(--MainColor);
+  }
+  .navBarSection .header .navBar .btn {
+    margin-left: 1rem;
+  }
+  .navBarSection .header .navBar .btn a {
+    color: var(--whiteColor);
+    font-weight: 500;
+  }
+  .navBarSection .header .navBar .loginBtn {
+    background: none;
+    border: 1px solid var(--MainColor);
+  }
+  .navBarSection .header .navBar .loginBtn:hover {
+    background: var(--MainColor);
+  }
+  .navBarSection .header .navBar .loginBtn:hover a {
+    color: var(--whiteColor);
+  }
+}
+@media screen and (min-width: 960px) {
+  .header .navBar .navLists .navItem {
+    padding: 0 0.7rem;
+  }
+}/*# sourceMappingURL=Navbar.css.map */
