@@ -54,7 +54,7 @@ const Populars = () => {
         <div className="secContainer">
 
             <div className="secHeader flex">
-                <div data-aos="fade-right" data-aos-duration="2500" className="textDiv">
+                <div className="textDiv">
                     <h2 className="secTitle">
                         Popular Rooms
                     </h2>
@@ -62,7 +62,7 @@ const Populars = () => {
                         Discover comfort and style in every room, where luxury meets thoughtful design.
                     </p>
                 </div>
-                <div data-aos="fade-left" data-aos-duration="2500" className="iconsDiv flex">
+                <div className="iconsDiv flex">
                     <BsArrowLeftShort className='icon leftIcon'/>
                     <BsArrowRightShort className='icon rightIcon' />
                 </div>
@@ -72,7 +72,7 @@ const Populars = () => {
                 {
                     Data.map(({id,imgSrc,bedType,roomType,price})=>{
                         return (
-                            <div data-aos="fade-up" className="singleRoom">
+                            <div className="singleRoom">
                                 <div className="roomImage">
                                     <img src={imgSrc} alt="" />
                                     <div className="overlayInfo">

@@ -20,19 +20,19 @@ const Footer = () => {
   return (
     <section className="footer">
         <div className="secContainer container grid">
-            <div data-aos="fade-up" data-aos-duration="2000" className="logoDiv">
-                <div data-aos="fade-up" data-aos-duration="2000" className="footerLogo">
+            <div className="logoDiv">
+                <div className="footerLogo">
                     <a href="#" className="logo flex">
                         <img src={Logo} className="Logo" alt="logo" /> 
                     </a>
                 </div>
-                <div data-aos="fade-up" data-aos-duration="3000" className="socials flex">
+                <div className="socials flex">
                 <ImFacebook className="icon"/>
                 <BsTwitter  className="icon"/>
                 <AiFillInstagram  className="icon"/>
                 </div>
             </div>
-            <div data-aos="fade-up" data-aos-duration="3000" className="footerLinks">
+            <div className="footerLinks">
                 <span className="linkTitle">
                     Information
                 </span>
@@ -49,7 +49,7 @@ const Footer = () => {
                     <a href="">Rates</a>
                 </li>
             </div>
-            <div data-aos="fade-up" data-aos-duration="4000" className="footerLinks">
+            <div className="footerLinks">
                 <span className="linkTitle">
                     Helpful Links
                 </span>
@@ -66,7 +66,7 @@ const Footer = () => {
                     <a href="">Privacy and Privileges</a>
                 </li>
             </div>
-            <div data-aos="fade-up" data-aos-duration="5000"className="footerLinks">
+            <div className="footerLinks">
                     <span className="linkTitle">
                         Contact Us!
                     </span>
