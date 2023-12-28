@@ -39,12 +39,12 @@ const Navbar = () => {
             <div className={active}>
                 <ul className="navLists flex">
                     <li className="navItem">
-                        <a href="" className="navLink">
+                        <a href="http://localhost:3000" className="navLink">
                             Home
                         </a>
                     </li>
                     <li className="navItem">
-                        <a href="" className="navLink">
+                        <a href="http://localhost:3000/rooms" className="navLink">
                             Rooms
                         </a>
                     </li>
@@ -54,7 +54,7 @@ const Navbar = () => {
                         </a>
                     </li>
                     <div className="headerBtns flex">
-                        <button className="btn loginBtn"><a href="">Login</a></button>
+                        <button className="btn loginBtn"><a href="http://localhost:3000/login">Login</a></button>
                     </div>
                 </ul>
                 <div onClick={removeNav} className="closeNavbar">

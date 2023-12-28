@@ -10,6 +10,8 @@ import LandingPage from './Pages/LandingPage'
 
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
+import LoginPage from './Pages/Login/LoginPage';
+import RoomPage from './Pages/Rooms/RoomPage';
 
 
 const Layout = () => {
@@ -30,6 +32,14 @@ const Layout = () => {
         {
           path: '/',
           element: <LandingPage />,
+        },
+        {
+          path:'/login',
+          element: <LoginPage />
+        },
+        {
+          path:'/rooms',
+          element: <RoomPage />
         },
       ],
     },
