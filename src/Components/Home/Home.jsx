@@ -14,29 +14,29 @@ const Home = () => {
     <section className="home">
         <div className="secContainer container">
             <div className="homeText">
-                <h1 data-aos="fade-up" className="title">
+                <h1 className="title">
                     Your Second Home, Mian Curocho
                 </h1>
-                <p data-aos="fade-up" data-aos-duration="2500"className="subTitle">
+                <p className="subTitle">
                     A place where your comfort is met with unparalleled luxury
                 </p>
 
-                <button data-aos="fade-up" data-aos-duration="3000" className="btn"><p>Book Now!</p></button>
+                <button className="btn"><p>Book Now!</p></button>
             </div>
             <div className="homeCard grid">
-                <div data-aos="fade-right" data-aos-duration="2000"className="locationDiv">
+                <div className="locationDiv">
                     <label htmlFor="location">Dream Room</label>
                     <input type="text" placeholder='Room Type' />
                 </div>
-                <div data-aos="fade-right" data-aos-duration="2000"className="distDiv">
+                <div className="distDiv">
                     <label htmlFor="distance">Bed Size</label>
                     <input type="text" placeholder='Standard' />
                 </div>
-                <div data-aos="fade-right" data-aos-duration="2000"className="priceDiv">
+                <div className="priceDiv">
                     <label htmlFor="price">Price</label>
                     <input type="text" placeholder='$140-$500' />
                 </div>
-                <div data-aos="fade-left" data-aos-duration="2000"className="">
+                <div className="">
                     <button className="btn">
                         <p>Search</p>
                     </button>
