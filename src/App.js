@@ -6,10 +6,15 @@ import {
     Outlet,
   } from 'react-router-dom';
 
-import LandingPage from './Pages/LandingPage'
+import LandingPage from './Pages/LandingPage/LandingPage'
 
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
+import LoginPage from './Pages/Login/LoginPage';
+import RoomPage from './Pages/Rooms/RoomPage';
+import Menu from './Pages/Menu/Menu';
+import Services from './Pages/Services/Services';
+import Dashboard from './Pages/Dashboard/Dashboard';
 
 
 const Layout = () => {
@@ -30,6 +35,26 @@ const Layout = () => {
         {
           path: '/',
           element: <LandingPage />,
+        },
+        {
+          path:'/login',
+          element: <LoginPage />
+        },
+        {
+          path:'/rooms',
+          element: <RoomPage />
+        },
+        {
+            path:'/menu',
+            element: <Menu />
+        },
+        {
+            path:'/services',
+            element: <Services />
+        },
+        {
+            path:'/dashboard',
+            element: <Dashboard />
         },
       ],
     },

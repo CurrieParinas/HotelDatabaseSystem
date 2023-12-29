@@ -24,7 +24,7 @@ const About = () => {
             </h2>
 
             <div className="mainContent aboutContent container grid">
-                <div data-aos="fade-up" data-aos-duration="2000" className="singleItem">
+                <div className="singleItem">
                     <img src={image1} alt="" />
                     <h3>
                         500+ Guests
@@ -35,7 +35,7 @@ const About = () => {
                     every month.
                     </p>
                 </div>
-                <div data-aos="fade-up" data-aos-duration="2000" className="singleItem">
+                <div className="singleItem">
                     <img src={image2} alt="" />
                     <h3>
                         730+ Rooms
@@ -47,7 +47,7 @@ const About = () => {
                     tailored accommodation experience for every traveler.
                     </p>
                 </div>
-                <div data-aos="fade-up" data-aos-duration="2000" className="singleItem">
+                <div className="singleItem">
                 <img src={image3} alt="" />
                     <h3>
                         1100+ Reviews
@@ -64,7 +64,7 @@ const About = () => {
 
             <div className="videoCard container">
                 <div className="cardContent grid">
-                    <div data-aos="fade-right" data-aos-duration="2000" className="cardText">
+                    <div className="cardText">
                         <h2>
                             Unforgettable experiences, timeless memories
                         </h2>
@@ -75,7 +75,7 @@ const About = () => {
                         </p>
                     </div>
 
-                    <div data-aos="fade-left" data-aos-duration="2000" className="cardVideo">
+                    <div className="cardVideo">
                         <video src={video} autoPlay loop muted type="video/mp4"></video>
                     </div>
                 </div>
