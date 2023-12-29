@@ -7,6 +7,7 @@ import { TbGridDots } from "react-icons/tb";
 
 
 const Navbar = () => {
+    let time = new Date().toLocaleTimeString()
 
     const [active, setActive] = useState('navBar')
     const showNav=()=> {
@@ -40,6 +41,11 @@ const Navbar = () => {
                 <ul className="navLists flex">
                     <li className="navItem">
                         <a href="http://localhost:3000" className="navLink">
+                            {time}
+                        </a>
+                    </li>
+                    <li className="navItem">
+                        <a href="http://localhost:3000" className="navLink">
                             Home
                         </a>
                     </li>
@@ -49,8 +55,18 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li className="navItem">
-                        <a href="" className="navLink">
-                            Contact
+                        <a href="http://localhost:3000/menu" className="navLink">
+                            Menu
+                        </a>
+                    </li>
+                    <li className="navItem">
+                        <a href="http://localhost:3000/services" className="navLink">
+                            Services
+                        </a>
+                    </li>
+                    <li className="navItem">
+                        <a href="http://localhost:3000/dashboard" className="navLink">
+                            Dashboard
                         </a>
                     </li>
                     <div className="headerBtns flex">
