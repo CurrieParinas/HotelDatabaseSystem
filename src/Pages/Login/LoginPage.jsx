@@ -1,12 +1,11 @@
 import React,{useState,useEffect} from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const LoginPage = () =>{
-    const [employee,setEmployee] = useState({
-        email:'',
-        password:''
-    });
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword,setInputPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const target = e.target;
@@ -27,21 +26,26 @@ const LoginPage = () =>{
             email:inputEmail,
             password: inputPassword
         };
-        
-
-        setEmployee(inputEmployee);
+    
         console.log(inputEmployee);
 
         try{
-            const response = await fetch(`http://localhost:8080/miancurocho/accounts/getId?accountEmail=${inputEmployee.email}&accountPassword=${inputEmployee.password}`)
+            const response = await fetch(`http://localhost:8080/miancurocho/accounts/getIdAndType?email=${inputEmployee.email}&password=${inputEmployee.password}`)
             if(response.ok){
-                const data = await response.text();
+                const data = await response.json();
                 //PERFORM NAVIGATION HERE
-                if(data === ''){
+                if(data.length === 0){
                     console.log('Invalid password')
                 }
                 else{
-                    console.log(data)
+                    
+                    if(data[0].EMPLOYEE_TYPE === "FD"){
+                        navigate(`/fd/dashboard/${data[0].EMPLOYEE_ID}`)
+                    } else{
+                        navigate(`/${data[0].EMPLOYEE_TYPE}/dashboard/${data[0].EMPLOYEE_ID}`)
+                        console.log('OTHERS TYPE ')
+                    }
+                    
                 }
             }else {
                 console.log('Server returned an error:', response.statusText);
@@ -49,8 +53,7 @@ const LoginPage = () =>{
 
         }   catch (error){
             console.log('Error occured while logging in',error)
-        }
-        
+        }    
     }
 
     return(
