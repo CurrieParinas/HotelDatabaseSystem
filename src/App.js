@@ -15,6 +15,7 @@ import RoomPage from './Pages/Rooms/RoomPage';
 import Menu from './Pages/Menu/Menu';
 import Services from './Pages/Services/Services';
 import Dashboard from './Pages/Dashboard/Dashboard';
+import Booking from './Pages/Booking/Booking';
 
 
 const Layout = () => {
@@ -55,6 +56,10 @@ const Layout = () => {
         {
             path:'/dashboard',
             element: <Dashboard />
+        },
+        {
+            path:'/booking',
+            element: <Booking />
         },
       ],
     },

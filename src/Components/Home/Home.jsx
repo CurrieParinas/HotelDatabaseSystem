@@ -21,7 +21,7 @@ const Home = () => {
                     A place where your comfort is met with unparalleled luxury
                 </p>
 
-                <button className="btn"><p>Book Now!</p></button>
+                <button className="btn"><a href="http://localhost:3000/booking">Book Now!</a></button>
             </div>
             <div className="homeCard grid">
                 <div className="locationDiv">

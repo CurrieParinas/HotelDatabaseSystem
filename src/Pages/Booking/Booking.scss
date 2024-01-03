@@ -1,0 +1,251 @@
+/* Colors */
+:root {
+    --MainColor: #ad974f;
+    --HoverColor: #8E793E;
+    --DarkGrey: #231F20;
+    --DirtyWhite: #EAEAEA;
+    --whiteColor: #ffffff;
+    --blackColor: #2e2e2e;
+    --textColor: #9f9f92;
+    --whiteColor2: #ededed;
+    --greyBG: #231F20;
+    --greyText: #bfbfbf;
+    --inputColor: #f8f6f7;
+}
+
+
+.bookingSection {
+    padding: 13vh 0;
+    .bookingContainer {
+        .welcome {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: -1rem;
+            .bookTitle {
+                padding-left: 4rem;
+                h1 {
+                    font-size: 37px;
+                }
+                p {
+                    margin-top: -0.3rem;
+                    color: #9f9f92;
+                }
+            }
+            .viewGuest {
+                margin-left: auto;
+                padding-right: 4rem;
+                .viewGuestButton {
+                    background-color: #ad8c1e;
+                    &:hover {
+                        background: #d6ba5d;
+                        
+                        a {
+                            color: #2e2e2e;
+                        }
+                    }
+
+                    a {
+                        font-size: 17px;
+                        color: #ffffff;
+                    }
+                }
+            }
+        }
+        .guestInformation {
+            padding: 3rem;
+            .primaryGuest {
+                padding-left: 1rem;
+            }
+            .name {
+                display: flex;
+                flex-direction: row;
+                border-radius: 1rem;
+                padding: 1rem;
+                background: var(--whiteColor);
+                gap: 1rem;
+                .firstNameDiv, .middleNameDiv, .surnameDiv {
+                    width: 100%;
+        
+                    label {
+                        display: block;
+                        color: var(--textColor);
+                        font-weight: 500;
+                        font-size: 18px;
+                        padding-bottom: .4rem;
+        
+                    }
+        
+                    input {
+                        width: 100%;
+                        background: #e9e9e9;
+                        border-radius: 10px;
+                        border: none;
+                        padding: 10px;
+                        font-size: 13px;
+                        font-weight: 500;
+        
+                        &::placeholder {
+                            font-size: 13px;
+                            opacity: .5;
+                            font-weight: 400;
+                        }
+                        &:focus {
+                            outline: none;
+                        }
+        
+                    }
+                }
+            }
+            .birthdayAndAdress {
+                display: flex;
+                flex-direction: row;
+                border-radius: 1rem;
+                padding: 1rem;
+                background: var(--whiteColor);
+                gap: 1rem;
+                .birthday, .address {
+                    width: 100%;
+        
+                    label {
+                        display: block;
+                        color: var(--textColor);
+                        font-weight: 500;
+                        font-size: 18px;
+                        padding-bottom: .4rem;
+        
+                    }
+        
+                    input {
+                        width: 100%;
+                        background: #e9e9e9;
+                        border-radius: 10px;
+                        border: none;
+                        padding: 10px;
+                        font-size: 13px;
+                        font-weight: 500;
+        
+                        &::placeholder {
+                            font-size: 13px;
+                            opacity: .5;
+                            font-weight: 400;
+                        }
+                        &:focus {
+                            outline: none;
+                        }
+        
+                    }
+                }
+            }
+            .emailNumTel {
+                display: flex;
+                flex-direction: row;
+                border-radius: 1rem;
+                padding: 1rem;
+                background: var(--whiteColor);
+                gap: 1rem;
+                .email, .number, .telephone {
+                    width: 100%;
+        
+                    label {
+                        display: block;
+                        color: var(--textColor);
+                        font-weight: 500;
+                        font-size: 18px;
+                        padding-bottom: .4rem;
+        
+                    }
+        
+                    input {
+                        width: 100%;
+                        background: #e9e9e9;
+                        border-radius: 10px;
+                        border: none;
+                        padding: 10px;
+                        font-size: 13px;
+                        font-weight: 500;
+        
+                        &::placeholder {
+                            font-size: 13px;
+                            opacity: .5;
+                            font-weight: 400;
+                        }
+                        &:focus {
+                            outline: none;
+                        }
+        
+                    }
+                }
+            }
+            .roomNumTypeCheckInandOut {
+                display: flex;
+                flex-direction: row;
+                border-radius: 1rem;
+                padding: 1rem;
+                background: var(--whiteColor);
+                gap: 1rem;
+                .roomNum, .roomType, .checkInDate, .checkOutDate, .iconsDivBooking{
+                    width: 100%;
+        
+                    label {
+                        display: block;
+                        color: var(--textColor);
+                        font-weight: 500;
+                        font-size: 18px;
+                        padding-bottom: .4rem;
+        
+                    }
+        
+                    input {
+                        width: 100%;
+                        background: #e9e9e9;
+                        border-radius: 10px;
+                        border: none;
+                        padding: 10px;
+                        font-size: 13px;
+                        font-weight: 500;
+        
+                        &::placeholder {
+                            font-size: 13px;
+                            opacity: .5;
+                            font-weight: 400;
+                        }
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }            
+            }    
+        }
+
+        .addAndBookButton {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 4rem;
+            margin-top: -1rem;
+            .moreButtons {
+                .addMoreGuest {
+                    margin: 1rem;
+                    background-color: #d3c188;
+                    &:hover {
+                        background: #ebdfba;
+                    }
+                }
+                .bookin {
+                    background-color: #ad8c1e;
+                    &:hover {
+                        background: #d6ba5d;
+                        
+                        p {
+                            color: #2e2e2e;
+                        }
+                    }
+    
+                    p {
+                        color: #ffffff;
+                    }
+                }
+            }
+        }
+    }
+}

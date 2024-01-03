@@ -1,0 +1,222 @@
+/* Colors */
+:root {
+  --MainColor: #ad974f;
+  --HoverColor: #8E793E;
+  --DarkGrey: #231F20;
+  --DirtyWhite: #EAEAEA;
+  --whiteColor: #ffffff;
+  --blackColor: #2e2e2e;
+  --textColor: #9f9f92;
+  --whiteColor2: #ededed;
+  --greyBG: #231F20;
+  --greyText: #bfbfbf;
+  --inputColor: #f8f6f7;
+}
+
+.bookingSection {
+  padding: 13vh 0;
+}
+.bookingSection .bookingContainer .welcome {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -1rem;
+}
+.bookingSection .bookingContainer .welcome .bookTitle {
+  padding-left: 4rem;
+}
+.bookingSection .bookingContainer .welcome .bookTitle h1 {
+  font-size: 37px;
+}
+.bookingSection .bookingContainer .welcome .bookTitle p {
+  margin-top: -0.3rem;
+  color: #9f9f92;
+}
+.bookingSection .bookingContainer .welcome .viewGuest {
+  margin-left: auto;
+  padding-right: 4rem;
+}
+.bookingSection .bookingContainer .welcome .viewGuest .viewGuestButton {
+  background-color: #ad8c1e;
+}
+.bookingSection .bookingContainer .welcome .viewGuest .viewGuestButton:hover {
+  background: #d6ba5d;
+}
+.bookingSection .bookingContainer .welcome .viewGuest .viewGuestButton:hover a {
+  color: #2e2e2e;
+}
+.bookingSection .bookingContainer .welcome .viewGuest .viewGuestButton a {
+  font-size: 17px;
+  color: #ffffff;
+}
+.bookingSection .bookingContainer .guestInformation {
+  padding: 3rem;
+}
+.bookingSection .bookingContainer .guestInformation .primaryGuest {
+  padding-left: 1rem;
+}
+.bookingSection .bookingContainer .guestInformation .name {
+  display: flex;
+  flex-direction: row;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--whiteColor);
+  gap: 1rem;
+}
+.bookingSection .bookingContainer .guestInformation .name .firstNameDiv, .bookingSection .bookingContainer .guestInformation .name .middleNameDiv, .bookingSection .bookingContainer .guestInformation .name .surnameDiv {
+  width: 100%;
+}
+.bookingSection .bookingContainer .guestInformation .name .firstNameDiv label, .bookingSection .bookingContainer .guestInformation .name .middleNameDiv label, .bookingSection .bookingContainer .guestInformation .name .surnameDiv label {
+  display: block;
+  color: var(--textColor);
+  font-weight: 500;
+  font-size: 18px;
+  padding-bottom: 0.4rem;
+}
+.bookingSection .bookingContainer .guestInformation .name .firstNameDiv input, .bookingSection .bookingContainer .guestInformation .name .middleNameDiv input, .bookingSection .bookingContainer .guestInformation .name .surnameDiv input {
+  width: 100%;
+  background: #e9e9e9;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.bookingSection .bookingContainer .guestInformation .name .firstNameDiv input::placeholder, .bookingSection .bookingContainer .guestInformation .name .middleNameDiv input::placeholder, .bookingSection .bookingContainer .guestInformation .name .surnameDiv input::placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
+}
+.bookingSection .bookingContainer .guestInformation .name .firstNameDiv input:focus, .bookingSection .bookingContainer .guestInformation .name .middleNameDiv input:focus, .bookingSection .bookingContainer .guestInformation .name .surnameDiv input:focus {
+  outline: none;
+}
+.bookingSection .bookingContainer .guestInformation .birthdayAndAdress {
+  display: flex;
+  flex-direction: row;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--whiteColor);
+  gap: 1rem;
+}
+.bookingSection .bookingContainer .guestInformation .birthdayAndAdress .birthday, .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .address {
+  width: 100%;
+}
+.bookingSection .bookingContainer .guestInformation .birthdayAndAdress .birthday label, .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .address label {
+  display: block;
+  color: var(--textColor);
+  font-weight: 500;
+  font-size: 18px;
+  padding-bottom: 0.4rem;
+}
+.bookingSection .bookingContainer .guestInformation .birthdayAndAdress .birthday input, .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .address input {
+  width: 100%;
+  background: #e9e9e9;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.bookingSection .bookingContainer .guestInformation .birthdayAndAdress .birthday input::placeholder, .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .address input::placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
+}
+.bookingSection .bookingContainer .guestInformation .birthdayAndAdress .birthday input:focus, .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .address input:focus {
+  outline: none;
+}
+.bookingSection .bookingContainer .guestInformation .emailNumTel {
+  display: flex;
+  flex-direction: row;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--whiteColor);
+  gap: 1rem;
+}
+.bookingSection .bookingContainer .guestInformation .emailNumTel .email, .bookingSection .bookingContainer .guestInformation .emailNumTel .number, .bookingSection .bookingContainer .guestInformation .emailNumTel .telephone {
+  width: 100%;
+}
+.bookingSection .bookingContainer .guestInformation .emailNumTel .email label, .bookingSection .bookingContainer .guestInformation .emailNumTel .number label, .bookingSection .bookingContainer .guestInformation .emailNumTel .telephone label {
+  display: block;
+  color: var(--textColor);
+  font-weight: 500;
+  font-size: 18px;
+  padding-bottom: 0.4rem;
+}
+.bookingSection .bookingContainer .guestInformation .emailNumTel .email input, .bookingSection .bookingContainer .guestInformation .emailNumTel .number input, .bookingSection .bookingContainer .guestInformation .emailNumTel .telephone input {
+  width: 100%;
+  background: #e9e9e9;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.bookingSection .bookingContainer .guestInformation .emailNumTel .email input::placeholder, .bookingSection .bookingContainer .guestInformation .emailNumTel .number input::placeholder, .bookingSection .bookingContainer .guestInformation .emailNumTel .telephone input::placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
+}
+.bookingSection .bookingContainer .guestInformation .emailNumTel .email input:focus, .bookingSection .bookingContainer .guestInformation .emailNumTel .number input:focus, .bookingSection .bookingContainer .guestInformation .emailNumTel .telephone input:focus {
+  outline: none;
+}
+.bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut {
+  display: flex;
+  flex-direction: row;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--whiteColor);
+  gap: 1rem;
+}
+.bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomNum, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomType, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkInDate, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkOutDate {
+  width: 100%;
+}
+.bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomNum label, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomType label, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkInDate label, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkOutDate label {
+  display: block;
+  color: var(--textColor);
+  font-weight: 500;
+  font-size: 18px;
+  padding-bottom: 0.4rem;
+}
+.bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomNum input, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomType input, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkInDate input, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkOutDate input {
+  width: 100%;
+  background: #e9e9e9;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomNum input::placeholder, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomType input::placeholder, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkInDate input::placeholder, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkOutDate input::placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
+}
+.bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomNum input:focus, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomType input:focus, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkInDate input:focus, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkOutDate input:focus {
+  outline: none;
+}
+.bookingSection .bookingContainer .addAndBookButton {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 4rem;
+  margin-top: -1rem;
+}
+.bookingSection .bookingContainer .addAndBookButton .addMoreGuest {
+  margin-right: 1rem;
+  background-color: #d3c188;
+}
+.bookingSection .bookingContainer .addAndBookButton .addMoreGuest:hover {
+  background: #ebdfba;
+}
+.bookingSection .bookingContainer .addAndBookButton .bookin {
+  background-color: #ad8c1e;
+}
+.bookingSection .bookingContainer .addAndBookButton .bookin:hover {
+  background: #d6ba5d;
+}
+.bookingSection .bookingContainer .addAndBookButton .bookin:hover p {
+  color: #2e2e2e;
+}
+.bookingSection .bookingContainer .addAndBookButton .bookin p {
+  color: #ffffff;
+}/*# sourceMappingURL=Booking.css.map */

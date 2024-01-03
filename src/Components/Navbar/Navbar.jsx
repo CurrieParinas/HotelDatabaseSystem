@@ -40,7 +40,7 @@ const Navbar = () => {
             <div className={active}>
                 <ul className="navLists flex">
                     <li className="navItem">
-                        <a href="http://localhost:3000" className="navLink">
+                        <a className="navLink">
                             {time}
                         </a>
                     </li>
