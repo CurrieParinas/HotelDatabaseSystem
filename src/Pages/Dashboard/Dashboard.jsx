@@ -6,19 +6,44 @@ import { Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody
 function Dashboard() {
   const {employee_id} = useParams();
   const navigate = useNavigate();
+  const [rooms, setRooms] = useState([]);
   const [brn,setBRN] = useState({
     brn_id: '',
     employee_id : '',
     booking_date : '',
     status: 'BOOKED'
   })
+  
 
   useEffect(()=>{
+    getAvailableRooms()
     brn.employee_id = employee_id;
     getCurrentDate()
     generateBRNID()
   },[])
+  const getAvailableRooms = async () => {
+    try{
+        let response = await fetch('http://localhost:8080/miancurocho/room/allAvailableRooms')
+        let roomsData = await response.json()
+        console.log(roomsData)
+        setRooms(roomsData)
 
+        // Generate rows dynamically based on roomsData
+        const generatedRows = roomsData.map((room) => ({
+            roomNumber: room.ROOM_NUMBER,
+            details: 'details', // You may need to fetch these details from the server
+            kitchen: 'kitchenServiceOrdered',
+            concierge: 'conciergeServiceOrdered',
+            housekeeping: 'housekeepingServiceOrdered',
+            status: 'booked-in',
+        }));
+
+        setRows(generatedRows);
+    }catch(error){
+        console.error(error)
+    }
+    
+}
   const getCurrentDate = () => {
 
     const currentDate = new Date();
@@ -93,136 +118,7 @@ function Dashboard() {
     {id:"status", name:"Status"}
   ]
 
-  const rows = [
-    {
-        "roomNumber":1,
-        "details":"details",
-        "kitchen":"kitchenServiceOrdered",
-        "concierge":"conciergeServiceOrdered",
-        "housekeeping":"housekeepingServiceOrdered",
-        "status":"booked-in",
-    },
-    {
-        "roomNumber":2,
-        "details":"details",
-        "kitchen":"kitchenServiceOrdered",
-        "concierge":"conciergeServiceOrdered",
-        "housekeeping":"housekeepingServiceOrdered",
-        "status":"booked-in",
-    },
-    {
-        "roomNumber":3,
-        "details":"details",
-        "kitchen":"kitchenServiceOrdered",
-        "concierge":"conciergeServiceOrdered",
-        "housekeeping":"housekeepingServiceOrdered",
-        "status":"booked-in",
-    },
-    {
-        "roomNumber":4,
-        "details":"details",
-        "kitchen":"kitchenServiceOrdered",
-        "concierge":"conciergeServiceOrdered",
-        "housekeeping":"housekeepingServiceOrdered",
-        "status":"booked-in",
-    },
-    // {
-    //     "roomNumber":1,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":2,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":3,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":4,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":1,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":2,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":3,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":4,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":1,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":2,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":3,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // },
-    // {
-    //     "roomNumber":4,
-    //     "details":"details",
-    //     "kitchen":"kitchenServiceOrdered",
-    //     "concierge":"conciergeServiceOrdered",
-    //     "housekeeping":"housekeepingServiceOrdered",
-    //     "status":"booked-in",
-    // }
-  ]
+  const [rows,setRows] = useState([])
 
   const [page, pageChange] = useState(0)
   const [rowPerPage, rowPerPageChange] = useState(5)

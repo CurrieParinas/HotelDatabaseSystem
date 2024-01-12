@@ -10,6 +10,11 @@ function Booking() {
     const {employee_id} = useParams();
     const {brn_id} = useParams();
     const navigate = useNavigate();
+    const [charge,setCharge] = useState({
+        brn_id: brn_id,
+        room_number : '',
+        cost : ''
+    })
 
     const initialInputState = {
         inputFirstName: '',
