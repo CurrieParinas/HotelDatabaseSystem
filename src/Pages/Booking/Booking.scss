@@ -69,7 +69,7 @@
         
                     label {
                         display: block;
-                        color: var(--textColor);
+                        color: var(--greyBG);
                         font-weight: 500;
                         font-size: 18px;
                         padding-bottom: .4rem;
@@ -109,7 +109,7 @@
         
                     label {
                         display: block;
-                        color: var(--textColor);
+                        color: var(--greyBG);
                         font-weight: 500;
                         font-size: 18px;
                         padding-bottom: .4rem;
@@ -149,7 +149,7 @@
         
                     label {
                         display: block;
-                        color: var(--textColor);
+                        color: var(--greyBG);
                         font-weight: 500;
                         font-size: 18px;
                         padding-bottom: .4rem;
@@ -184,12 +184,12 @@
                 padding: 1rem;
                 background: var(--whiteColor);
                 gap: 1rem;
-                .roomNum, .roomType, .checkInDate, .checkOutDate, .iconsDivBooking{
+                .roomNum, .roomType, .checkInDate, .checkOutDate{
                     width: 100%;
-        
+
                     label {
                         display: block;
-                        color: var(--textColor);
+                        color: var(--greyBG);
                         font-weight: 500;
                         font-size: 18px;
                         padding-bottom: .4rem;
@@ -223,9 +223,8 @@
             justify-content: flex-end;
             padding-right: 4rem;
             margin-top: -1rem;
-            .moreButtons {
                 .addMoreGuest {
-                    margin: 1rem;
+                    margin-right: 1rem;
                     background-color: #d3c188;
                     &:hover {
                         background: #ebdfba;
@@ -245,7 +244,6 @@
                         color: #ffffff;
                     }
                 }
-            }
         }
     }
 }
