@@ -15,8 +15,9 @@ import RoomPage from './Pages/Rooms/RoomPage';
 import Menu from './Pages/Menu/Menu';
 import Services from './Pages/Services/Services';
 import Dashboard from './Pages/Dashboard/Dashboard';
-import Guest from './Pages/Guest/Guest';
-
+import Booking from './Pages/Booking/Booking';
+import Payment from './Pages/Payment/Payment';
+// import Guest from './Pages/Guest/Guest';
 
 const Layout = () => {
     return (
@@ -54,17 +55,17 @@ const Layout = () => {
             element: <Services />
         },
         {
-          path:'/FD/dashboard/:employee_id',
-          element: <Dashboard />
+            path:'/dashboard',
+            element: <Dashboard />
         },
         {
-          path:'/:employee_type/dashboard/:employee_id',
-          element:<OthersDashboard />
+            path:'/booking',
+            element: <Booking />
         },
         {
-          path:'/addGuest/:employee_id/:brn_id',
-          element:<Guest/>
-        }
+            path:'/payment',
+            element: <Payment />
+        },
       ],
     },
   ]);
