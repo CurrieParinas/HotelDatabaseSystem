@@ -29,12 +29,49 @@ const Layout = () => {
     );
   };
 
+  // const router = createBrowserRouter([
+  //   {
+  //     path: '/',
+  //     element: <Layout />,
+  //     children: [
+  //       {
+  //         path: '/',
+  //         element: <LandingPage />,
+  //       },
+  //       {
+  //         path:'/login',
+  //         element: <LoginPage />
+  //       },
+  //       {
+  //         path:'/rooms',
+  //         element: <RoomPage />
+  //       },
+  //       {
+  //           path:'/menu',
+  //           element: <Menu />
+  //       },
+  //       {
+  //           path:'/services',
+  //           element: <Services />
+  //       },
+  //       {
+  //           path:'/dashboard',
+  //           element: <Dashboard />
+  //       },
+  //       {
+  //           path:'/booking',
+  //           element: <Booking />
+  //       },
+  //       {
+  //           path:'/payment',
+  //           element: <Payment />
+  //       },
+  //     ],
+  //   },
+  // ]);
+
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <Layout />,
-      children: [
-        {
           path: '/',
           element: <LandingPage />,
         },
@@ -55,19 +92,17 @@ const Layout = () => {
             element: <Services />
         },
         {
-            path:'/dashboard',
+            path:'/fd/dashboard/:employee_id',
             element: <Dashboard />
         },
         {
-            path:'/booking',
+            path:'/booking/:employee_id/:brn_id',
             element: <Booking />
         },
         {
             path:'/payment',
             element: <Payment />
         },
-      ],
-    },
   ]);
 
 function App() {

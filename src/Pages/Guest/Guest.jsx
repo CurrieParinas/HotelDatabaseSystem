@@ -33,7 +33,7 @@ function Guest() {
         setInputAge(value);
       }
       
-  }
+    }
   return (
     <div> 
         <input name="inputFirstName" value={inputFirstName} onChange={handleChange} />

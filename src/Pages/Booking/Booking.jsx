@@ -3,9 +3,78 @@ import { useState } from 'react'
 import './Booking.css'
 
 import { CiCircleRemove } from "react-icons/ci";
+import { useParams } from 'react-router-dom';
 
 function Booking() {
     const [guestList, setguestList] = useState([])
+    const {employee_id} = useParams();
+    const {brn_id} = useParams();
+    const [inputFirstName, setInputFirstName] = useState('');
+    const [inputMiddleName, setInputMiddleName] = useState('');
+    const [inputLastName, setInputLastName] = useState('');
+    const [inputBirthday, setInputBirthday] = useState('');
+    const [inputAddress, setInputAddress] = useState('');
+    const [inputContactNo, setInputContactNo] = useState('');
+    const [inputEmail, setInputEmail] = useState('');
+    const [inputAge, setInputAge] = useState('');
+
+    const handleChange = (e) => {
+      const target = e.target;
+      const value = target.value;
+      const name = target.name;
+
+      if (name === 'inputEmail'){
+          setInputEmail(value);
+      }else if(name === 'inputFirstName'){
+          setInputFirstName(value);
+      }else if(name === 'inputMiddleName'){
+        setInputMiddleName(value);
+      }else if(name === 'inputLastName'){
+        setInputLastName(value);
+      }else if(name === 'inputBirthday'){
+        setInputBirthday(value);
+      }else if(name === 'inputAddress'){
+        setInputAddress(value);
+      }else if(name === 'inputContactNo'){
+        setInputContactNo(value);
+      }else if(name === 'inputAge'){
+        setInputAge(value);
+      }
+      
+    }
+    
+    const addPrimaryGuest = async (e) => {
+        const primaryGuest ={
+            brn_id: brn_id,
+            first_name: inputFirstName,
+            middle_name: inputMiddleName,
+            last_name: inputLastName,
+            birthday: inputBirthday,
+            address: inputAddress,
+            contact_number: inputContactNo,
+            email_address:inputEmail,
+            age: inputAge,
+            guest_type: 'P'
+        };
+
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/guest/add', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(primaryGuest)
+            })
+            console.log(primaryGuest)
+            // navigate(`/booking/${employee_id}/${brn.brn_id}`)    
+                
+            }catch(error){
+              //ADD FRONTEND ERROR DISPLAY HERE 
+              console.log('Add Guest Error. Please Try again')
+              console.log(error)
+          }
+    }
 
     const handleguestAdd = () => {
         setguestList([...guestList, {guest:""}])
@@ -41,9 +110,9 @@ function Booking() {
                     </p>
                 </div>
                 <div className="viewGuest headerBtns flex">
-                    <button className="viewGuestButton btn loginBtn">
-                        <a href="http://localhost:3000/dashboard">View My Guest</a>
-                    </button>
+                <button className="viewGuestButton btn loginBtn">
+                    <a href={`http://localhost:3000/fd/dashboard/${employee_id}`}>View My Guests</a>
+                </button>
                 </div>
             </div>
             <div className="guestInformation">
@@ -53,41 +122,41 @@ function Booking() {
                 <div className="name">
                     <div className="firstNameDiv">
                         <label htmlFor="firstName">First Name</label>
-                        <input type="text" placeholder='Juan' />
+                        <input name="inputFirstName" value={inputFirstName} type="text" placeholder='Juan' onChange={handleChange}/>
                     </div>
                     <div className="middleNameDiv">
                         <label htmlFor="middleName">Middle Name</label>
-                        <input type="text" placeholder='Karlos' />
+                        <input name="inputMiddleName" value={inputMiddleName} type="text" placeholder='Karlos' onChange={handleChange} />
                     </div>
                     <div className="surnameDiv">
                         <label htmlFor="surname">Surname</label>
-                        <input type="text" placeholder='Dela Cruz' />
+                        <input name="inputLastName" value={inputLastName} type="text" placeholder='Dela Cruz' onChange={handleChange} />
                     </div>
                 </div>
 
                 <div className="birthdayAndAdress">
                     <div className="birthday">
                         <label htmlFor="birthday">Birthday</label>
-                        <input type="text" placeholder='YYYY-MM-DD' />
+                        <input name="inputBirthday" value={inputBirthday} type="text" placeholder='YYYY-MM-DD' onChange={handleChange}/>
                     </div>
                     <div className="address">
                         <label htmlFor="address">Address</label>
-                        <input type="text" placeholder='St, City, Province, Country' />
+                        <input name="inputAddress" value={inputAddress} type="text" placeholder='St, City, Province, Country' onChange={handleChange}/>
                     </div>
                 </div>
 
                 <div className="emailNumTel">
                     <div className="email">
                         <label htmlFor="email">Email</label>
-                        <input type="text" placeholder='sample@email.com' />
+                        <input name="inputEmail" value={inputEmail} type="text" placeholder='sample@email.com' onChange={handleChange}/>
                     </div>
                     <div className="number">
                         <label htmlFor="middleName">Number</label>
-                        <input type="text" placeholder='09123456789' />
+                        <input name="inputContactNo" value={inputContactNo} type="text" placeholder='09123456789' onChange={handleChange}/>
                     </div>
                     <div className="telephone">
-                        <label htmlFor="telephone">Telephone</label>
-                        <input type="text" placeholder='5051234' />
+                        <label htmlFor="telephone">Age</label>
+                        <input name="inputAge" value={inputAge} type="text" placeholder='21' onChange={handleChange}/>
                     </div>
                 </div>
                 <div className="roomNumTypeCheckInandOut">
@@ -141,7 +210,7 @@ function Booking() {
                     <button className="addMoreGuest btn" onClick={handleguestAdd}>
                         <p>Add a guest</p>
                     </button>
-                    <button className="bookin btn">
+                    <button className="bookin btn" onClick={addPrimaryGuest}>
                         <p>Book In</p>
                     </button>
                 </div>
@@ -164,7 +233,7 @@ function Booking() {
                     <div className="name">
                         <div className="firstNameDiv">
                             <label htmlFor="firstName">First Name</label>
-                            <input type="text" placeholder='Juan' />
+                            <input name={`firstName${index}`}type="text" placeholder='Juan' />
                         </div>
                         <div className="middleNameDiv">
                             <label htmlFor="middleName">Middle Name</label>

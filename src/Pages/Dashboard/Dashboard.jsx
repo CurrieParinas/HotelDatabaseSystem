@@ -75,7 +75,7 @@ function Dashboard() {
               body: JSON.stringify(brn)
       })
       console.log(brn)
-      navigate(`/addGuest/${employee_id}/${brn.brn_id}`)    
+      navigate(`/booking/${employee_id}/${brn.brn_id}`)    
           
       }catch(error){
         //ADD FRONTEND ERROR DISPLAY HERE 
@@ -249,7 +249,7 @@ function Dashboard() {
                     <p className='dashboardTitle'>Welcome back, NAME HERE!</p>
                 </div>
                 <div className="rightWelcome">
-                    <button className="bookAnotherGuest btn">
+                    <button className="bookAnotherGuest btn" onClick={handleSubmitBook}>
                         <p>Book another guest?</p>
                     </button>
                 </div>
