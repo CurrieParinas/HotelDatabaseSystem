@@ -39,12 +39,9 @@ const LoginPage = () =>{
                 }
                 else{
                     
-                    if(data[0].EMPLOYEE_TYPE === "FD"){
-                        navigate(`/fd/dashboard/${data[0].EMPLOYEE_ID}`)
-                    } else{
-                        navigate(`/${data[0].EMPLOYEE_TYPE}/dashboard/${data[0].EMPLOYEE_ID}`)
-                        console.log('OTHERS TYPE ')
-                    }
+                    
+                navigate(`/${data[0].EMPLOYEE_TYPE}/dashboard/${data[0].EMPLOYEE_ID}`)
+                        
                     
                 }
             }else {

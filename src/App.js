@@ -55,7 +55,7 @@ const Layout = () => {
             element: <Services />
         },
         {
-            path:'/fd/dashboard/:employee_id',
+            path:'/:employee_type/dashboard/:employee_id',
             element: <Dashboard />
         },
         {

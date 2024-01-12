@@ -13,7 +13,6 @@ function Booking() {
     const [charge,setCharge] = useState({
         brn_id: brn_id,
         room_number : '',
-        cost : ''
     })
 
     const initialInputState = {
@@ -24,7 +23,8 @@ function Booking() {
         inputAddress: '',
         inputContactNo: '',
         inputEmail: '',
-        inputAge: ''
+        inputAge: '',
+        inputRoomNumber: ''
     };
     
     const [inputFields, setInputFields] = useState(initialInputState);
@@ -108,7 +108,32 @@ function Booking() {
         }
     };
 
+    const addCharge = async (e) => {
+        const updatedCharge ={
+            brn_id: charge.brn_id,
+            room_number: inputFields.inputRoomNumber
+        }
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/charge/add', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(updatedCharge)
+            })
+            console.log(updatedCharge)
+            // navigate(`/booking/${employee_id}/${brn.brn_id}`)    
+                
+            }catch(error){
+              //ADD FRONTEND ERROR DISPLAY HERE 
+              console.log('Add Charge Error. Please Try again')
+              console.log(error)
+          }
+    }
+
     const handleBookin = () => {
+        addCharge()
         addPrimaryGuest()
         addSecondaryGuests()
         navigate(`/fd/dashboard/${employee_id}`)
@@ -215,7 +240,7 @@ function Booking() {
                     </div>
                     <div className="roomNum">
                         <label htmlFor="roomNum">Room Number</label>
-                        <input type="text" placeholder='21' />
+                        <input name="inputRoomNumber" value={inputFields.inputRoomNumber}type="text" placeholder='21'onChange={handleChange} />
                     </div>
                     <div className="checkInDate">
                         <label htmlFor="checkInDate">Check-In Date</label>

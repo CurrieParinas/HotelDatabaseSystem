@@ -4,9 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination} from "@mui/material";
 
 function Dashboard() {
-  const {employee_id} = useParams();
+  const {employee_id,employee_type} = useParams();
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
+  const [bookedBRNs, setBookedBRNs] = useState([]);
   const [brn,setBRN] = useState({
     brn_id: '',
     employee_id : '',
@@ -16,34 +17,48 @@ function Dashboard() {
   
 
   useEffect(()=>{
-    getAvailableRooms()
+    getBookedRooms()
     brn.employee_id = employee_id;
     getCurrentDate()
     generateBRNID()
+    console.log(employee_type)
   },[])
-  const getAvailableRooms = async () => {
-    try{
-        let response = await fetch('http://localhost:8080/miancurocho/room/allAvailableRooms')
-        let roomsData = await response.json()
-        console.log(roomsData)
-        setRooms(roomsData)
+  const getBookedRooms = async () => {
+    try {
+        let response = await fetch('http://localhost:8080/miancurocho/room/bookedOrCheckedInRooms');
+        let roomsData = await response.json();
+        console.log(roomsData);
+        setRooms(roomsData);
 
-        // Generate rows dynamically based on roomsData
-        const generatedRows = roomsData.map((room) => ({
-            roomNumber: room.ROOM_NUMBER,
-            details: 'details', // You may need to fetch these details from the server
-            kitchen: 'kitchenServiceOrdered',
-            concierge: 'conciergeServiceOrdered',
-            housekeeping: 'housekeepingServiceOrdered',
-            status: 'booked-in',
+        //GET BRN DETAILS OF ALL
+        const generatedRows = await Promise.all(roomsData.map(async (room) => {
+            try {
+                let brnResponse = await fetch(`http://localhost:8080/miancurocho/brn/${room.BRN_ID}`);
+                let brnData = await brnResponse.json();
+                console.log(brnData);
+
+                let primaryGuestResponse = await fetch(`http://localhost:8080/miancurocho/guest/primaryGuestOfBRN/${room.BRN_ID}`)
+                let primaryGuestData = await primaryGuestResponse.json();
+                console.log(primaryGuestData)
+                return {
+                    roomNumber: room.ROOM_NUMBER,
+                    details: primaryGuestData[0].FIRST_NAME +" "+ primaryGuestData[0].MIDDLE_NAME + " "+ primaryGuestData[0].LAST_NAME, // You may need to fetch these details from the server
+                    kitchen: 'kitchenServiceOrdered',
+                    concierge: 'conciergeServiceOrdered',
+                    housekeeping: 'housekeepingServiceOrdered',
+                    status: brnData.status
+                };
+            } catch (brnError) {
+                console.error(brnError);
+                return null; // Handle the error or provide a default value
+            }
         }));
 
         setRows(generatedRows);
-    }catch(error){
-        console.error(error)
+    } catch (error) {
+        console.error(error);
     }
-    
-}
+};
   const getCurrentDate = () => {
 
     const currentDate = new Date();
@@ -165,55 +180,72 @@ function Dashboard() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                            {rows
-                            .slice(page * rowPerPage, page * rowPerPage + rowPerPage)
-                            .map((row, i) => {
-                                return (
-                                <TableRow key={i}>
-                                    {columns.map((column, j) => {
-                                    let value = row[column.id];
+    {rows
+        .slice(page * rowPerPage, page * rowPerPage + rowPerPage)
+        .map((row, i) => (
+            <TableRow key={i}>
+                {columns.map((column, j) => {
+                    let value = row[column.id];
 
-                                    // Render "Add" button only for specific columns
-                                    if (["concierge", "kitchen", "housekeeping"].includes(column.id)) {
+                    // Render "Add" button only for specific columns
+                    return (
+                        <TableCell key={j} align="center">
+                            {(() => {
+                                if ((employee_type === 'k' && column.id === 'kitchen') ) {
+                                    return (
+                                        <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+                                            {value}
+                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }}>
+                                                Add K
+                                            </button>
+                                        </div>
+                                    );
+                                } else if( (employee_type === 'c' && column.id === 'concierge')){
+                                    return (
+                                        <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+                                            {value}
+                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }}>
+                                                Add C
+                                            </button>
+                                        </div>
+                                    );
+                                }
+                                else if( (employee_type === 'h' && column.id === 'housekeeping')){
+                                    return (
+                                        <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+                                            {value}
+                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }}>
+                                                Add H
+                                            </button>
+                                        </div>
+                                    );
+                                }
+                                else {
+                                    if (employee_type === "fd" && ["status"].includes(column.id)) {
                                         return (
-                                        <TableCell key={j} align="center" 
-                                            >
-                                            <div className="cellDiv" style={{ display: "flex", alignItems:"center",justifyContent:"center", flexDirection: "column" }}>
-                                                {value}
-                                                <button className='btn' style={{width:"100px", margin:".5rem"}}>
-                                                Add
-                                                </button>
-                                            </div>
-                                        </TableCell>
-                                        );
-                                    }
-                                    if (["status"].includes(column.id)) {
-                                        return (
-                                        <TableCell key={j} align="center" 
-                                            >
                                             <div className="cellDiv" style={{ display: "flex", alignItems:"center",justifyContent:"center", flexDirection: "column" }}>
                                                 {value}
                                                 <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem"}}>
-                                                Check-In
+                                                    Check-In
                                                 </button>
                                                 <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem", backgroundColor:"#231F20", color:"#ad974f"}}>
-                                                Check-Out
+                                                    Check-Out
                                                 </button>
                                             </div>
-                                        </TableCell>
                                         );
+                                    } else {
+                                        return value;
                                     }
+                                }
+                            })()}
+                        </TableCell>
+                    );
+                })}
+            </TableRow>
+        ))
+    }
+</TableBody>
 
-                                    return (
-                                        <TableCell key={j} align="center">
-                                        {value}
-                                        </TableCell>
-                                    );
-                                    })}
-                                </TableRow>
-                                    );
-                                })}
-                            </TableBody>
                         </Table>
                     </TableContainer>
                     <TablePagination
