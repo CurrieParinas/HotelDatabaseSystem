@@ -115,7 +115,7 @@ function Dashboard() {
               body: JSON.stringify(brn)
       })
       console.log(brn)
-      navigate(`/booking/${employee_id}/${brn.brn_id}`)    
+      navigate(`/roombooking/${employee_id}/${brn.brn_id}`)    
           
       }catch(error){
         //ADD FRONTEND ERROR DISPLAY HERE 

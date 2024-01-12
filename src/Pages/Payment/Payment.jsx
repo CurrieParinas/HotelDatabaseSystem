@@ -284,4 +284,4 @@ const [modal, setModal] = useState(false);
   )
 }
 
-export default Payment
+export default Payment;

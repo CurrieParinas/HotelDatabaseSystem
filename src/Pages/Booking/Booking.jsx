@@ -7,8 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 function Booking() {
     const [guestList, setGuestList] = useState([])
-    const {employee_id} = useParams();
-    const {brn_id} = useParams();
+    const {brn_id, room_number,employee_id} = useParams();
     const navigate = useNavigate();
     const [charge,setCharge] = useState({
         brn_id: brn_id,
@@ -111,7 +110,7 @@ function Booking() {
     const addCharge = async (e) => {
         const updatedCharge ={
             brn_id: charge.brn_id,
-            room_number: inputFields.inputRoomNumber
+            room_number: room_number
         }
         try{
             const response = await fetch('http://localhost:8080/miancurocho/charge/add', {
@@ -252,7 +251,7 @@ function Booking() {
                     </div>
                 </div>
                 
-                {roomList.map((singleRoom, index) => (
+                {/* {roomList.map((singleRoom, index) => (
                 <div className="roomNumTypeCheckInandOut">
                     <div className="roomType">
                         <label htmlFor="roomType">Room Type</label>
@@ -274,13 +273,13 @@ function Booking() {
                         <CiCircleRemove className='icon removeIcon' onClick={handleRoomRemove}/>
                     </div>
                 </div>
-                ))}
+                ))} */}
             </div>
             {guestList.length === 0 && (
                 <div className="addAndBookButton">
-                    <button className="addMoreGuest btn" onClick={handleRoomAdd}>
+                    {/* <button className="addMoreGuest btn" onClick={handleRoomAdd}>
                         <p>Add another room</p>
-                    </button>
+                    </button> */}
                     <button className="addMoreGuest btn" onClick={handleguestAdd}>
                         <p>Add a guest</p>
                     </button>
@@ -289,16 +288,19 @@ function Booking() {
                     </button>
                 </div>
             )}
-            {guestList.length !== 0 && (
+            {/* {guestList.length !== 0 && (
             <div className="addAndBookButton">
                 <button className="addMoreGuest btn" onClick={handleRoomAdd} style={{marginRight: "0"}}>
                     <p>Add another room</p>
                 </button>
             </div>            
-            )}
+            )} */}
             {guestList.map((singleService, index) => (
     <div className="secondaryGuestParentDiv" key={index}>
         <div className="guestInformation">
+            <div className="primaryGuest">
+                <h1><i>Additional Guest</i></h1>
+            </div>
             {/* ... (other elements) ... */}
             <div className="name">
                 <div className="firstNameDiv">
