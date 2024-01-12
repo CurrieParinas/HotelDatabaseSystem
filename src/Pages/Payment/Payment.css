@@ -1,1 +1,166 @@
-/*# sourceMappingURL=Payment.css.map */
+/* Colors */
+:root {
+  --MainColor: #ad974f;
+  --HoverColor: #8E793E;
+  --DarkGrey: #231F20;
+  --DirtyWhite: #EAEAEA;
+  --whiteColor: #ffffff;
+  --blackColor: #2e2e2e;
+  --textColor: #9f9f92;
+  --whiteColor2: #ededed;
+  --greyBG: #231F20;
+  --greyText: #bfbfbf;
+  --inputColor: #f8f6f7;
+}
+
+.paymentSec {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding-bottom: 5vh;
+}
+.paymentSec .paymentContainer {
+  padding-top: 10vh;
+  width: 90vw;
+}
+.paymentSec .paymentContainer .welcomePayment {
+  justify-content: space-between;
+}
+.paymentSec .paymentContainer .welcomePayment .leftWelcome h1 {
+  font-size: 3rem;
+}
+.paymentSec .paymentContainer .welcomePayment .leftWelcome p {
+  margin-top: -5%;
+  color: var(--textColor);
+}
+.paymentSec .paymentContainer .guestList {
+  display: flex;
+  justify-content: center;
+  color: #2e2e2e;
+  padding: 1rem;
+}
+.paymentSec .paymentContainer .totalCostDiv {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 2rem;
+}
+.paymentSec .paymentContainer .totalCostDiv p {
+  font-size: 1.5rem;
+}
+.paymentSec .paymentContainer .payButtonDiv {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  padding: 1.5rem 0;
+}
+.paymentSec .paymentContainer .payButtonDiv .payButton {
+  background-color: var(--MainColor);
+}
+.paymentSec .paymentContainer .payButtonDiv .payButton a {
+  color: var(--blackColor);
+}
+
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.btn-modal {
+  padding: 10px 20px;
+  display: block;
+  margin: 100px auto 0;
+  font-size: 18px;
+}
+
+.modal, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(49, 49, 49, 0.8);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px;
+  border-radius: 1rem;
+  width: 30vw;
+}
+.modal-content .cardNumber, .modal-content .cvvAndEd, .modal-content .expDate, .modal-content .paymentType {
+  width: 95%;
+  padding-top: 1rem;
+  padding-left: 5%;
+}
+.modal-content .cardNumber label, .modal-content .cvvAndEd label, .modal-content .expDate label, .modal-content .paymentType label {
+  display: block;
+  color: var(--greyBG);
+  font-weight: 500;
+  font-size: 18px;
+  padding-bottom: 0.4rem;
+}
+.modal-content .cardNumber input, .modal-content .cvvAndEd input, .modal-content .expDate input, .modal-content .paymentType input {
+  width: 100%;
+  background: #e9e9e9;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.modal-content .cardNumber input::placeholder, .modal-content .cvvAndEd input::placeholder, .modal-content .expDate input::placeholder, .modal-content .paymentType input::placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
+}
+.modal-content .cardNumber input:focus, .modal-content .cvvAndEd input:focus, .modal-content .expDate input:focus, .modal-content .paymentType input:focus {
+  outline: none;
+}
+.modal-content .cardNumber select, .modal-content .cvvAndEd select, .modal-content .expDate select, .modal-content .paymentType select {
+  width: 100%;
+  background: #e9e9e9;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+}
+
+.proceedToPayment {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding: 1rem 0;
+}
+.proceedToPayment .proctopay {
+  margin-top: 1rem;
+  width: 90%;
+  border-radius: 0.5rem;
+}
+
+.paymentTitle {
+  display: flex;
+  justify-content: center;
+}/*# sourceMappingURL=Payment.css.map */
