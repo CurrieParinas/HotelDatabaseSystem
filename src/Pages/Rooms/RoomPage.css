@@ -1,0 +1,191 @@
+/* Colors */
+:root {
+  --MainColor: #ad974f;
+  --HoverColor: #8E793E;
+  --DarkGrey: #231F20;
+  --DirtyWhite: #EAEAEA;
+  --whiteColor: #ffffff;
+  --blackColor: #2e2e2e;
+  --textColor: #9f9f92;
+  --whiteColor2: #ededed;
+  --greyBG: #231F20;
+  --greyText: #bfbfbf;
+  --inputColor: #f8f6f7;
+}
+
+.roomPage {
+  padding-top: 15rem;
+}
+.roomPage .roomsecContainer .roomsecHeader {
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+}
+.roomPage .roomsecContainer .roomsecHeader .roomsecTitle {
+  color: var(--blackColor);
+  line-height: 1.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  font-size: 60px;
+}
+.roomPage .roomsecContainer .roomsecHeader p {
+  padding-top: 3rem;
+  text-align: center;
+  font-size: 20px;
+  color: var(--textColor);
+  font-weight: 500;
+}
+.roomPage .roomsecContainer .roommainContent {
+  padding: 2rem 0;
+  gap: 1rem;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.45);
+  margin: 4rem;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .roomsingleRoomContent {
+  display: flex;
+  flex-direction: row;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .roomsingleRoomContent .roomroomImage {
+  height: 100%;
+  width: 60%;
+  overflow: hidden;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .roomsingleRoomContent .roomroomImage img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .roomsingleRoomContent .roomroomImage h3 {
+  color: var(--whiteColor);
+  font-weight: 600;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .roomsingleRoomContent .roomroomImage p {
+  color: var(--whiteColor);
+  opacity: 0.7;
+  font-size: 13px;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .roomsingleRoomContent .roomroomInfo {
+  height: 200px;
+  width: 10rem;
+  text-align: right;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .amenities {
+  height: 10rem;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 2rem 0;
+  gap: 0.5rem;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .amenities .singleAmenity {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: var(--greyText);
+  gap: 0.5rem;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .amenities .singleAmenity .icon {
+  color: var(--greyBG);
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .amenities .roomType {
+  margin-top: 0.5rem;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .amenities .roomType .icon {
+  color: var(--DarkGrey);
+  font-size: 30px;
+  margin-right: 0.5rem;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .amenities .btn {
+  margin-top: 0.5rem;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  padding: 0.6rem;
+  color: var(--whiteColor);
+  font-weight: 600;
+  gap: 0.5rem;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .amenities .btn .icon {
+  color: var(--whiteColor);
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .amenities .btn:hover {
+  background: var(--HoverColor);
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .amenities .btn:hover p {
+  color: var(--whiteColor);
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .roomroomDesc {
+  font-size: 15px;
+  padding-left: 2rem;
+  padding-top: 1rem;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .roomroomText {
+  font-size: 30px;
+  padding-left: 2rem;
+  padding-top: 1rem;
+}
+.roomPage .roomsecContainer .roommainContent .roomsingleRoom .roomroomPrice {
+  color: var(--blackColor);
+  line-height: 1.5rem;
+  font-size: 20px;
+  padding-left: 2rem;
+}
+
+@media screen and (min-width: 480px) {
+  .roomPage {
+    padding-top: 10rem;
+  }
+}
+@media screen and (min-width: 556px) {
+  .roomPage .roomsecContainer .roomsecHeader {
+    widows: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .roomPage .roomsecContainer .roomsecHeader .roomtextDiv {
+    text-align: start;
+    max-width: 70%;
+  }
+  .roomPage .roomsecContainer .roomsecHeader .roomiconsDiv {
+    justify-content: flex-end;
+  }
+}
+@media screen and (min-width: 320px) {
+  .roomPage {
+    padding-top: 17rem;
+  }
+}
+@media screen and (min-width: 480px) {
+  .roomPage {
+    padding-top: 10rem;
+  }
+}
+@media screen and (min-width: 720px) {
+  .roomPage {
+    padding-top: 7rem;
+  }
+}
+@media screen and (min-width: 884px) {
+  .roomContent {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .roomPage {
+    padding-top: 10rem;
+  }
+  .roomPage .roomsecContainer .roomsecHeader .roomtextDiv .roomsecTitle {
+    font-size: 2.2rem;
+  }
+  .roomPage .roomsecContainer .roomsecHeader .roomtextDiv p {
+    font-size: 15px;
+  }
+}/*# sourceMappingURL=RoomPage.css.map */

@@ -1,0 +1,55 @@
+/* Colors */
+:root {
+    --MainColor: #ad974f;
+    --HoverColor: #8E793E;
+    --DarkGrey: #231F20;
+    --DirtyWhite: #EAEAEA;
+    --whiteColor: #ffffff;
+    --blackColor: #2e2e2e;
+    --textColor: #9f9f92;
+    --whiteColor2: #ededed;
+    --greyBG: #231F20;
+    --greyText: #bfbfbf;
+    --inputColor: #f8f6f7;
+}
+
+.kitchendashboardSec {
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    // height: 100vh;
+    padding-bottom: 10vh;
+    .kitchendashboardContainer {
+        padding-top: 10vh;
+        width: 90vw;
+        .kitchenwelcomeDB {
+            justify-content: space-between;
+            .kitchenleftWelcome {
+                h1 {
+                    font-size: 3rem;
+                }
+                p {
+                    margin-top: -5%;
+                    color: var(--textColor);
+                }
+            }
+            .kitchenrightWelcome {
+                // margin-top: 3%;
+                .kitchenbookAnotherGuest {
+                    background-color: var(--DarkGrey);
+                    p  {
+                        color: var(--whiteColor2);
+                    }
+                }
+            }
+        }
+        .kitchenguestList {
+            display: flex;
+            justify-content: center;
+            color: #2e2e2e;
+        }
+        .kitchentableDiv {
+            padding-top: 1rem;
+        }
+    }
+}
