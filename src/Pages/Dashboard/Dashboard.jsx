@@ -8,6 +8,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
   const [bookedBRNs, setBookedBRNs] = useState([]);
+  const [currentDate, setCurrentDate] = useState([]);
   const [brn,setBRN] = useState({
     brn_id: '',
     employee_id : '',
@@ -41,6 +42,7 @@ function Dashboard() {
                 let primaryGuestData = await primaryGuestResponse.json();
                 console.log(primaryGuestData)
                 return {
+                    brn_id: brnData.brn_id,
                     roomNumber: room.ROOM_NUMBER,
                     details: primaryGuestData[0].FIRST_NAME +" "+ primaryGuestData[0].MIDDLE_NAME + " "+ primaryGuestData[0].LAST_NAME, // You may need to fetch these details from the server
                     kitchen: 'kitchenServiceOrdered',
@@ -55,6 +57,7 @@ function Dashboard() {
         }));
 
         setRows(generatedRows);
+        console.log(generatedRows)
     } catch (error) {
         console.error(error);
     }
@@ -70,6 +73,8 @@ function Dashboard() {
     
     brn.booking_date = formattedDate
     console.log(brn.booking_date)
+    setCurrentDate(formattedDate)
+    console.log(currentDate)
     
   }
 
@@ -124,6 +129,57 @@ function Dashboard() {
     }
 
   }
+
+    const handleCheckIn = async (brnId) =>{
+        const brnToUpdate = {
+            brn_id: brnId,
+            check_in_date: currentDate,
+            status: "CHECKED-IN"
+        }
+
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/brn/update', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(brnToUpdate)
+            })
+            console.log(brnToUpdate)
+            window.location.reload();    
+            }catch(error){
+            //ADD FRONTEND ERROR DISPLAY HERE 
+            console.log('Checkin Error. Please Try again')
+            console.log(error)
+        }
+    }
+
+    const handleCheckOut = async (brnId) =>{
+        const brnToUpdate = {
+            brn_id: brnId,
+            check_out_date: currentDate,
+            status: "CHECKED-OUT"
+        }
+
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/brn/update', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(brnToUpdate)
+            })
+            console.log(brnToUpdate)
+            window.location.reload();    
+            }catch(error){
+            //ADD FRONTEND ERROR DISPLAY HERE 
+            console.log('Checkout Error. Please Try again')
+            console.log(error)
+        }
+    }
+
   const columns = [
     {id:"roomNumber", name:"Room Number"},
     {id:"details", name:"Details"},
@@ -183,7 +239,7 @@ function Dashboard() {
     {rows
         .slice(page * rowPerPage, page * rowPerPage + rowPerPage)
         .map((row, i) => (
-            <TableRow key={i}>
+            <TableRow key={row.brn_id+"-"+i}>
                 {columns.map((column, j) => {
                     let value = row[column.id];
 
@@ -191,7 +247,7 @@ function Dashboard() {
                     return (
                         <TableCell key={j} align="center">
                             {(() => {
-                                if ((employee_type === 'k' && column.id === 'kitchen') ) {
+                                if ((employee_type === 'k' && column.id === 'kitchen') || (employee_type === 'S' && column.id === 'kitchen')) {
                                     return (
                                         <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                                             {value}
@@ -200,7 +256,7 @@ function Dashboard() {
                                             </button>
                                         </div>
                                     );
-                                } else if( (employee_type === 'c' && column.id === 'concierge')){
+                                } else if( (employee_type === 'c' && column.id === 'concierge')|| (employee_type === 'S' && column.id === 'concierge')){
                                     return (
                                         <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                                             {value}
@@ -210,7 +266,7 @@ function Dashboard() {
                                         </div>
                                     );
                                 }
-                                else if( (employee_type === 'h' && column.id === 'housekeeping')){
+                                else if( (employee_type === 'h' && column.id === 'housekeeping')|| (employee_type === 'S' && column.id === 'housekeeping')){
                                     return (
                                         <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                                             {value}
@@ -221,14 +277,14 @@ function Dashboard() {
                                     );
                                 }
                                 else {
-                                    if (employee_type === "fd" && ["status"].includes(column.id)) {
+                                    if ((employee_type === "fd" && ["status"].includes(column.id))|| (employee_type === "S" && ["status"].includes(column.id))) {
                                         return (
                                             <div className="cellDiv" style={{ display: "flex", alignItems:"center",justifyContent:"center", flexDirection: "column" }}>
                                                 {value}
-                                                <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem"}}>
+                                                <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem"}} onClick={() => handleCheckIn(row.brn_id)}>
                                                     Check-In
                                                 </button>
-                                                <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem", backgroundColor:"#231F20", color:"#ad974f"}}>
+                                                <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem", backgroundColor:"#231F20", color:"#ad974f"}}onClick={() => handleCheckOut(row.brn_id)}>
                                                     Check-Out
                                                 </button>
                                             </div>

@@ -64,7 +64,6 @@ function Booking() {
             address: inputFields.inputAddress,
             contact_number: inputFields.inputContactNo,
             email_address:inputFields.inputEmail,
-            age: inputFields.inputAge,
             guest_type: 'P'
         };
         
@@ -227,12 +226,12 @@ function Booking() {
                         <label htmlFor="middleName">Number</label>
                         <input name="inputContactNo" value={inputFields.inputContactNo} type="text" placeholder='09123456789' onChange={handleChange}/>
                     </div>
-                    <div className="telephone">
+                    {/* <div className="telephone">
                         <label htmlFor="telephone">Age</label>
                         <input name="inputAge" value={inputFields.inputAge} type="text" placeholder='21' onChange={handleChange}/>
-                    </div>
+                    </div> */}
                 </div>
-                <div className="roomNumTypeCheckInandOut">
+                {/* <div className="roomNumTypeCheckInandOut">
                     <div className="roomType">
                         <label htmlFor="roomType">Room Type</label>
                         <input type="text" placeholder='Deluxe' />
@@ -249,7 +248,7 @@ function Booking() {
                         <label htmlFor="checkOutDate">Check-Out Date</label>
                         <input type="text" placeholder='YYYY-MM-DD' />
                     </div>
-                </div>
+                </div> */}
                 
                 {/* {roomList.map((singleRoom, index) => (
                 <div className="roomNumTypeCheckInandOut">
@@ -361,11 +360,11 @@ function Booking() {
                   <input name='contact_number' type="text" placeholder='09123456789' value={singleService.contact_number}
                         onChange={(e) => handleChange(e, index)}/>
               </div>
-              <div className="telephone">
+              {/* <div className="telephone">
                   <label htmlFor="telephone">Age</label>
                   <input name='age' type="text" placeholder='21' value={singleService.age}
                         onChange={(e) => handleChange(e, index)}/>
-              </div>
+              </div> */}
           </div>
         </div>
         <div className="addAndBookButton">
