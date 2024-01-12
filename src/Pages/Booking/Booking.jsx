@@ -148,7 +148,7 @@ function Booking() {
             )}
             {guestList.length != 0 && (
             <div className="addAndBookButton">
-                <button className="addMoreGuest btn" onClick={handleRoomAdd}>
+                <button className="addMoreGuest btn" onClick={handleRoomAdd} style={{marginRight: "0"}}>
                     <p>Add another room</p>
                 </button>
             </div>            
@@ -203,7 +203,7 @@ function Booking() {
                     </div>
                 </div>
                 <div className="addAndBookButton">
-                    <button className="addMoreGuest removeBtn btn" onClick={handleguestRemove}>
+                    <button className="addMoreGuest btn" onClick={handleguestRemove}>
                         <p> Remove Guest </p>
                     </button>
                     {guestList.length - 1 === index && (

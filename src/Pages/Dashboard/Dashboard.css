@@ -13,6 +13,36 @@
   --inputColor: #f8f6f7;
 }
 
-.fdDashboard {
-  height: 100vh;
+.dashboardSec {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10vh;
+}
+.dashboardSec .dashboardContainer {
+  padding-top: 10vh;
+  width: 90vw;
+}
+.dashboardSec .dashboardContainer .welcomeDB {
+  justify-content: space-between;
+}
+.dashboardSec .dashboardContainer .welcomeDB .leftWelcome h1 {
+  font-size: 3rem;
+}
+.dashboardSec .dashboardContainer .welcomeDB .leftWelcome p {
+  margin-top: -5%;
+  color: var(--textColor);
+}
+.dashboardSec .dashboardContainer .welcomeDB .rightWelcome .bookAnotherGuest {
+  background-color: var(--DarkGrey);
+}
+.dashboardSec .dashboardContainer .welcomeDB .rightWelcome .bookAnotherGuest p {
+  color: var(--whiteColor2);
+}
+.dashboardSec .dashboardContainer .guestList {
+  display: flex;
+  justify-content: center;
+  color: #2e2e2e;
+}
+.dashboardSec .dashboardContainer .tableDiv {
+  padding-top: 1rem;
 }/*# sourceMappingURL=Dashboard.css.map */

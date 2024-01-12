@@ -13,6 +13,43 @@
     --inputColor: #f8f6f7;
 }
 
-.fdDashboard {
-    height: 100vh;
+.dashboardSec {
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    // height: 100vh;
+    padding-bottom: 10vh;
+    .dashboardContainer {
+        padding-top: 10vh;
+        width: 90vw;
+        .welcomeDB {
+            justify-content: space-between;
+            .leftWelcome {
+                h1 {
+                    font-size: 3rem;
+                }
+                p {
+                    margin-top: -5%;
+                    color: var(--textColor);
+                }
+            }
+            .rightWelcome {
+                // margin-top: 3%;
+                .bookAnotherGuest {
+                    background-color: var(--DarkGrey);
+                    p  {
+                        color: var(--whiteColor2);
+                    }
+                }
+            }
+        }
+        .guestList {
+            display: flex;
+            justify-content: center;
+            color: #2e2e2e;
+        }
+        .tableDiv {
+            padding-top: 1rem;
+        }
+    }
 }

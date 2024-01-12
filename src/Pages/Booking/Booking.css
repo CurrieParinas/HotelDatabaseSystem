@@ -68,7 +68,7 @@
 }
 .bookingSection .bookingContainer .guestInformation .name .firstNameDiv label, .bookingSection .bookingContainer .guestInformation .name .middleNameDiv label, .bookingSection .bookingContainer .guestInformation .name .surnameDiv label {
   display: block;
-  color: var(--textColor);
+  color: var(--greyBG);
   font-weight: 500;
   font-size: 18px;
   padding-bottom: 0.4rem;
@@ -103,7 +103,7 @@
 }
 .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .birthday label, .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .address label {
   display: block;
-  color: var(--textColor);
+  color: var(--greyBG);
   font-weight: 500;
   font-size: 18px;
   padding-bottom: 0.4rem;
@@ -138,7 +138,7 @@
 }
 .bookingSection .bookingContainer .guestInformation .emailNumTel .email label, .bookingSection .bookingContainer .guestInformation .emailNumTel .number label, .bookingSection .bookingContainer .guestInformation .emailNumTel .telephone label {
   display: block;
-  color: var(--textColor);
+  color: var(--greyBG);
   font-weight: 500;
   font-size: 18px;
   padding-bottom: 0.4rem;
@@ -173,7 +173,7 @@
 }
 .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomNum label, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomType label, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkInDate label, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkOutDate label {
   display: block;
-  color: var(--textColor);
+  color: var(--greyBG);
   font-weight: 500;
   font-size: 18px;
   padding-bottom: 0.4rem;
