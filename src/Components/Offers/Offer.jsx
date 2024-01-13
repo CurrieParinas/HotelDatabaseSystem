@@ -23,7 +23,7 @@ const OfferedRooms = [
         imgSrc: image1,
         bedType: 'Double',
         roomType: 'Deluxe',
-        price: '500',
+        price: '5,000',
         discountPercentage: '30'
     },
     {
@@ -31,7 +31,7 @@ const OfferedRooms = [
         imgSrc: image2,
         bedType: 'Full XL',
         roomType: 'Executive Suite',
-        price: '1000',
+        price: '30,000',
         discountPercentage: '10'
     },
     {
@@ -39,7 +39,7 @@ const OfferedRooms = [
         imgSrc: image3,
         bedType: 'Queen',
         roomType: 'Executive Suite',
-        price: '1200',
+        price: '12,000',
         discountPercentage: '15'
     },
     {
@@ -47,7 +47,7 @@ const OfferedRooms = [
         imgSrc: image4,
         bedType: 'Queen',
         roomType: 'Presidential Suite',
-        price: '2100',
+        price: '21,000',
         discountPercentage: '19'
     },
 ]
@@ -84,7 +84,7 @@ const Offers = () => {
                                     
                                     <div className="price flex">
                                         <h4>
-                                            ${price}
+                                        ₱{price}
                                         </h4>
                                         <span className="status">
                                             For Rent
