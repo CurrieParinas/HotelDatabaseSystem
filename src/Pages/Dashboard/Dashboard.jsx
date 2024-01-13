@@ -3,7 +3,7 @@ import './Dashboard.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination} from "@mui/material";
 import Navbar from '../../Components/Navbar/Navbar';
-
+import CancelIcon from '@mui/icons-material/Cancel';
 function Dashboard() {
   const {employee_id,employee_type} = useParams();
   const navigate = useNavigate();
@@ -182,7 +182,74 @@ function Dashboard() {
     rowPerPageChange(+event.target.value)
     pageChange(0)
   }
+  const [selectedColumn, setSelectedColumn] = useState(null);
 
+  const toggleModal = (columnId) => {
+    setModal(!modal);
+    setSelectedColumn(columnId);
+  };
+  const [modal, setModal] = useState(false);
+  if(modal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
+
+  
+  const [selectedService, setSelectedService] = useState('');
+  const [quantity, setQuantity] = useState([])
+  const [price, setPrice] = useState([])
+  const handleSelectChange = (event) => {
+    const selectedOption = event.target.value;
+    setSelectedService(selectedOption);
+    console.log(`Selected Service: ${selectedOption}`);
+  };
+
+  const handleInputChange = (event) => {
+    const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        if (name === 'quantity'){
+            setQuantity(value);
+            console.log(quantity)
+        } else if (name === 'price'){
+            setPrice(value)
+        }
+  }
+
+  const handleAddService = (brnId) => {
+    addCharge(brnId)
+  };
+
+
+  const addCharge = async (brnId) => {
+    const updatedCharge ={
+        brn_id: brnId,
+        room_number: ""
+    }
+    try{
+        const response = await fetch('http://localhost:8080/miancurocho/charge/add', {
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(updatedCharge)
+        })
+        console.log(updatedCharge)
+        // navigate(`/booking/${employee_id}/${brn.brn_id}`)    
+            
+        }catch(error){
+          //ADD FRONTEND ERROR DISPLAY HERE 
+          console.log('Add Charge Error. Please Try again')
+          console.log(error)
+      }
+}
+  const handleAddToAccount = (brnId) => {
+    
+
+  }
   return (
     // <div className='dashboard'><h1>Dashboard</h1>
 
@@ -234,8 +301,14 @@ function Dashboard() {
                                     return (
                                         <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                                             {value}
-                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }}>
-                                                Add K
+                                            <button
+                                                className='btn'
+                                                style={{ width: "100px", margin: ".5rem" }}
+                                                onClick={() => {
+                                                    toggleModal(column.id);
+                                                    handleAddService(row.brn_id);
+                                                }}>
+                                                Add 
                                             </button>
                                         </div>
                                     );
@@ -243,8 +316,11 @@ function Dashboard() {
                                     return (
                                         <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                                             {value}
-                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }}>
-                                                Add C
+                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }} onClick={() => {
+                                                    toggleModal(column.id);
+                                                    handleAddService(row.brn_id);
+                                                }}>
+                                                Add 
                                             </button>
                                         </div>
                                     );
@@ -253,8 +329,11 @@ function Dashboard() {
                                     return (
                                         <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                                             {value}
-                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }}>
-                                                Add H
+                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }} onClick={() => {
+                                                    toggleModal(column.id);
+                                                    handleAddService(row.brn_id);
+                                                }}>
+                                                Add 
                                             </button>
                                         </div>
                                     );
@@ -300,6 +379,126 @@ function Dashboard() {
                 </Paper>
             </div>
         </div>
+
+        {modal && (
+        <div className="modal">
+            <div onClick={toggleModal} className="overlay">
+
+            </div>
+            <div className="modal-content">
+                <CancelIcon 
+                className="close-modal" 
+                onClick={toggleModal}
+                style={{fontSize:"2.5rem"}}
+                />
+                {selectedColumn === "kitchen" && (
+                    <div className="cardNumberInput">
+                        <div className="paymentType" >
+                            <label htmlFor="kitchenOrders">Available services:  </label>
+                            <select id="paymentType"
+                                name="payment"
+                                value={selectedService}
+                                onChange={handleSelectChange}>
+                                <option value="10">Breakfast Buffet</option>
+                                <option value="11">Lunch Buffet</option>
+                                <option value="12">Dinner Buffet</option>
+                                <option value="13">In-room Dining</option>
+                                <option value="17">Bar and Lounge</option>
+                                <option value="18">Garden Tea Party</option>
+                            </select>
+                        </div>
+                        <div className="cvvAndEd">
+                            <label htmlFor="quantity">Quantity: </label>
+                            <input
+                            name = "quantity"
+                            type="number"
+                            placeholder='123'
+                            value={quantity}
+
+                            onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className="cardNumber">
+                            <label htmlFor="price">Price: </label>
+                            <input
+                            name = "price"
+                            type="number"
+                            placeholder='$$$'
+                            value={price}
+                            onChange={handleInputChange}
+                            />
+                        </div>
+                    </div>
+                )}
+                {selectedColumn === "concierge" && (
+                    <div className="cardNumberInput">
+                    <div className="paymentType" >
+                        <label htmlFor="conciergeOrders">Available services:  </label>
+                        <select id="paymentType" name="payment">
+                            <option value="massageTherapy">Massage Therapy</option>
+                            <option value="facialTherapy">Facial Therapy</option>
+                            <option value="waterTherapy">Water Therapy</option>
+                            <option value="eventPlanning">Event Planning</option>
+                            <option value="islandHopping">Island Hopping</option>
+                            <option value="dayTourLand">Day Tour (Land)</option>
+                            <option value="airportTransfers">Airport Transfers</option>
+                            <option value="carRentals">Car Rentals</option>
+                            <option value="chaufferServices">Chauffer Services</option>
+                        </select>
+                    </div>
+                    <div className="cvvAndEd">
+                        <label htmlFor="quantity">Quantity: </label>
+                        <input
+                        type="number"
+                        placeholder='123'
+                        />
+                    </div>
+                    <div className="cardNumber">
+                        <label htmlFor="price">Price: </label>
+                        <input
+                        type="number"
+                        placeholder='$$$'
+                        />
+                    </div>
+                </div>
+                )}
+                {selectedColumn === "housekeeping" && (
+                    <div className="cardNumberInput">
+                    <div className="paymentType" >
+                        <label htmlFor="housekeepingOrders">Available services:  </label>
+                        <select id="paymentType" name="payment">
+                            <option value="roomCleaning">Room Cleaning</option>
+                            <option value="laundryServices">Laundry Services</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="restockingAmenities">Restocking Amenities</option>
+                            <option value="inRoomChips">In Room Chips</option>
+                            <option value="inRoomSoda">In Room Soda</option>
+                            <option value="inRoomSparklingWater">In Room Sparkling Water</option>
+                            <option value="inRoomChocolates">In Room Chocolates</option>
+                        </select>
+                    </div>
+                    <div className="cvvAndEd">
+                        <label htmlFor="quantity">Quantity: </label>
+                        <input
+                        type="number"
+                        placeholder='123'
+                        />
+                    </div>
+                    <div className="cardNumber">
+                        <label htmlFor="price">Price: </label>
+                        <input
+                        type="number"
+                        placeholder='$$$'
+                        />
+                    </div>
+                </div>
+                )}
+                <div className="proceedToPayment">
+                    <button className="proctopay btn " onClick={handleAddToAccount}>Add to account</button>
+                </div>
+            </div>
+        </div>
+        )}
     </section>
     </div>
     

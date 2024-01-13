@@ -10,6 +10,10 @@ function Payment() {
     const [currentDate, setCurrentDate] = useState([]);
     const navigate = useNavigate();
 
+    useEffect(()=>{
+        getCurrentDate();
+      },[])
+      
     const getCurrentDate = () => {
 
         const currentDate = new Date();
