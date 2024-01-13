@@ -218,36 +218,113 @@ function Dashboard() {
         }
   }
 
-  const handleAddService = (brnId) => {
-    addCharge(brnId)
+  const handleAddService = (brnId,roomNumber) => {
+    addCharge(brnId,roomNumber)
+    // setBRNID(brnId)
   };
 
-
-  const addCharge = async (brnId) => {
+  const [BRN_ID, setBRNID] = useState([])
+//   const [availCharge, setAvailCharge] = useState([]);
+  const addCharge = async (brnId,roomNumber) => {
+    try {
+        let response = await fetch(`http://localhost:8080/miancurocho/room-type/getPriceOfRoomNumber/${roomNumber}`);
+        let roomCost = await response.json();
+        console.log(roomCost);
+        // updatedCharge.cost = roomCost
+    // navigate(`/booking/${employee_id}/${brn.brn_id}`)
     const updatedCharge ={
         brn_id: brnId,
-        room_number: ""
+        room_number: "",
+        cost: roomCost
     }
-    try{
-        const response = await fetch('http://localhost:8080/miancurocho/charge/add', {
-                headers:{
-                    'Accept':'application/json',
-                    'Content-Type':'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify(updatedCharge)
-        })
-        console.log(updatedCharge)
-        // navigate(`/booking/${employee_id}/${brn.brn_id}`)    
-            
-        }catch(error){
-          //ADD FRONTEND ERROR DISPLAY HERE 
-          console.log('Add Charge Error. Please Try again')
-          console.log(error)
-      }
-}
-  const handleAddToAccount = (brnId) => {
+
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/charge/add', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(updatedCharge)
+            })
+            console.log(updatedCharge)
+            setBRNID(updatedCharge.brn_id)
+
+               
+                
+            }catch(error){
+              //ADD FRONTEND ERROR DISPLAY HERE 
+              console.log('Add Charge Error. Please Try again')
+              console.log(error)
+          }
     
+        }catch(error){
+            console.error(error)
+        }
+    }
+  const handleAddToAccount = async () => {
+    console.log(BRN_ID)
+    try {
+        let response = await fetch(`http://localhost:8080/miancurocho/charge/chargesOfBRN/${BRN_ID}`);
+        let chargesData = await response.json();
+        console.log(chargesData);
+
+        let availCharge = null;
+
+        for (let index = 0; index < chargesData.length; index++) {
+        if (chargesData[index].charge_id !== null) {
+            availCharge = chargesData[index].charge_id;
+            break;
+        }
+        }
+
+        console.log(availCharge);
+        let serviceLineEntry ={
+            charge_id: availCharge,
+            service_id: selectedService,
+            employee_id: employee_id,
+            service_date: currentDate
+        }
+
+        console.log(serviceLineEntry)
+
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/service-line/add', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(serviceLineEntry)
+            })
+            
+        }catch (error){
+            console.error(error)
+        }
+        
+        const chargeUpdateCost ={
+            charge_id: availCharge,
+            cost: price * quantity
+        }
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/charge/update', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(chargeUpdateCost)
+            })
+            console.log(chargeUpdateCost)
+            window.location.reload();    
+
+        }catch (error){
+            console.error(error)
+        }
+        // setRooms(roomsData);
+    }catch (error){
+        console.error(error)
+    }
 
   }
   return (
@@ -277,7 +354,7 @@ function Dashboard() {
             <div className="tableDiv">
                 <Paper>
                     <TableContainer>
-                        <Table stickyHeader>
+                        <Table>
                             <TableHead>
                                 <TableRow>
                                     {columns.map((column)=>(
@@ -306,7 +383,7 @@ function Dashboard() {
                                                 style={{ width: "100px", margin: ".5rem" }}
                                                 onClick={() => {
                                                     toggleModal(column.id);
-                                                    handleAddService(row.brn_id);
+                                                    handleAddService(row.brn_id, row.roomNumber);
                                                 }}>
                                                 Add 
                                             </button>
@@ -318,7 +395,7 @@ function Dashboard() {
                                             {value}
                                             <button className='btn' style={{ width: "100px", margin: ".5rem" }} onClick={() => {
                                                     toggleModal(column.id);
-                                                    handleAddService(row.brn_id);
+                                                    handleAddService(row.brn_id, row.roomNumber);
                                                 }}>
                                                 Add 
                                             </button>
@@ -331,7 +408,7 @@ function Dashboard() {
                                             {value}
                                             <button className='btn' style={{ width: "100px", margin: ".5rem" }} onClick={() => {
                                                     toggleModal(column.id);
-                                                    handleAddService(row.brn_id);
+                                                    handleAddService(row.brn_id, row.roomNumber);
                                                 }}>
                                                 Add 
                                             </button>
@@ -434,30 +511,38 @@ function Dashboard() {
                     <div className="cardNumberInput">
                     <div className="paymentType" >
                         <label htmlFor="conciergeOrders">Available services:  </label>
-                        <select id="paymentType" name="payment">
-                            <option value="massageTherapy">Massage Therapy</option>
-                            <option value="facialTherapy">Facial Therapy</option>
-                            <option value="waterTherapy">Water Therapy</option>
-                            <option value="eventPlanning">Event Planning</option>
-                            <option value="islandHopping">Island Hopping</option>
-                            <option value="dayTourLand">Day Tour (Land)</option>
-                            <option value="airportTransfers">Airport Transfers</option>
-                            <option value="carRentals">Car Rentals</option>
-                            <option value="chaufferServices">Chauffer Services</option>
+                        <select id="paymentType" name="payment"value={selectedService}
+                                onChange={handleSelectChange}>
+                            <option value="1">Massage Therapy</option>
+                            <option value="2">Facial Therapy</option>
+                            <option value="3">Water Therapy</option>
+                            <option value="4">Event Planning</option>
+                            <option value="5">Island Hopping</option>
+                            <option value="6">Day Tour (Land)</option>
+                            <option value="7">Airport Transfers</option>
+                            <option value="8">Car Rentals</option>
+                            <option value="9">Chauffer Services</option>
                         </select>
                     </div>
                     <div className="cvvAndEd">
                         <label htmlFor="quantity">Quantity: </label>
                         <input
+                        name = "quantity"
                         type="number"
                         placeholder='123'
+                        value={quantity}
+
+                        onChange={handleInputChange}
                         />
                     </div>
                     <div className="cardNumber">
                         <label htmlFor="price">Price: </label>
                         <input
+                        name = "price"
                         type="number"
                         placeholder='$$$'
+                        value={price}
+                        onChange={handleInputChange}
                         />
                     </div>
                 </div>
@@ -466,29 +551,36 @@ function Dashboard() {
                     <div className="cardNumberInput">
                     <div className="paymentType" >
                         <label htmlFor="housekeepingOrders">Available services:  </label>
-                        <select id="paymentType" name="payment">
-                            <option value="roomCleaning">Room Cleaning</option>
-                            <option value="laundryServices">Laundry Services</option>
-                            <option value="maintenance">Maintenance</option>
-                            <option value="restockingAmenities">Restocking Amenities</option>
-                            <option value="inRoomChips">In Room Chips</option>
-                            <option value="inRoomSoda">In Room Soda</option>
-                            <option value="inRoomSparklingWater">In Room Sparkling Water</option>
-                            <option value="inRoomChocolates">In Room Chocolates</option>
+                        <select id="paymentType" name="payment"value={selectedService}
+                                onChange={handleSelectChange}>
+                            <option value="19">Room Cleaning</option>
+                            <option value="20">Laundry Services</option>
+                            <option value="21">Maintenance</option>
+                            <option value="22">Restocking Amenities</option>
+                            <option value="23">In Room Chips</option>
+                            <option value="24">In Room Soda</option>
+                            <option value="25">In Room Sparkling Water</option>
+                            <option value="26">In Room Chocolates</option>
                         </select>
                     </div>
                     <div className="cvvAndEd">
                         <label htmlFor="quantity">Quantity: </label>
                         <input
+                        name = "quantity"
                         type="number"
                         placeholder='123'
+                        value={quantity}
+                        onChange={handleInputChange}
                         />
                     </div>
                     <div className="cardNumber">
                         <label htmlFor="price">Price: </label>
                         <input
+                        name = "price"
                         type="number"
                         placeholder='$$$'
+                        value={price}
+                        onChange={handleInputChange}
                         />
                     </div>
                 </div>

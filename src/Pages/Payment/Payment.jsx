@@ -9,10 +9,39 @@ function Payment() {
     const {brn_id,employee_id} = useParams();
     const [currentDate, setCurrentDate] = useState([]);
     const navigate = useNavigate();
+    const [rows,setRows] = useState([])
 
-    useEffect(()=>{
+    useEffect( async ()=>{
         getCurrentDate();
+        getCharges()
       },[])
+
+    const getCharges = async () => {
+        try {
+            let response = await fetch(`http://localhost:8080/miancurocho/charge/chargesOfBRN/${brn_id}`);
+            let chargesData = await response.json();
+            console.log(chargesData);
+    
+            //GET BRN DETAILS OF ALL
+            const generatedRows = await Promise.all(chargesData.map(async (charge) => {
+                
+                    return {
+                        "date":"12-12-23",
+                        "details":charge.room_number,
+                        "kitchen":"food",
+                        "concierge":"Transpo",
+                        "housekeeping":"Broken Bulb",
+                        "total":charge.cost,
+                    };
+            
+            }));
+    
+            setRows(generatedRows);
+            console.log(generatedRows)
+        } catch (error) {
+            console.error(error);
+        }
+    };
       
     const getCurrentDate = () => {
 
@@ -61,104 +90,7 @@ function Payment() {
         {id:"total", name:"Total"}
       ]
     
-      const rows = [
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-        {
-            "date":"12-12-23",
-            "details":"details",
-            "kitchen":"food",
-            "concierge":"Transpo",
-            "housekeeping":"Broken Bulb",
-            "total":200,
-        },
-      ]
+      
     
       const [page, pageChange] = useState(0)
       const [rowPerPage, rowPerPageChange] = useState(5)
