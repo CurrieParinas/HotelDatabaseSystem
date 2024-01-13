@@ -64,7 +64,7 @@ const Layout = () => {
             element: <Booking />
         },
         {
-            path:'/payment',
+            path:'/payment/:employee_id/:brn_id',
             element: <Payment />
         },
         {

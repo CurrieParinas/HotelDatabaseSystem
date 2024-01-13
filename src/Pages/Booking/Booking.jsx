@@ -4,6 +4,7 @@ import './Booking.css'
 
 import { CiCircleRemove } from "react-icons/ci";
 import { useNavigate, useParams } from 'react-router-dom';
+import Navbar from '../../Components/Navbar/Navbar';
 
 function Booking() {
     const [guestList, setGuestList] = useState([])
@@ -22,8 +23,6 @@ function Booking() {
         inputAddress: '',
         inputContactNo: '',
         inputEmail: '',
-        inputAge: '',
-        inputRoomNumber: ''
     };
     
     const [inputFields, setInputFields] = useState(initialInputState);
@@ -131,10 +130,17 @@ function Booking() {
     }
 
     const handleBookin = () => {
-        addCharge()
-        addPrimaryGuest()
-        addSecondaryGuests()
-        navigate(`/fd/dashboard/${employee_id}`)
+
+        const allFieldsValid = Object.values(inputFields).every(value => value && value.length > 0);
+        if(allFieldsValid){
+            addCharge()
+            addPrimaryGuest()
+            addSecondaryGuests()
+            navigate(`/fd/dashboard/${employee_id}`)
+        }else{
+            console.log("Please enter all fields")
+        }
+       
     }
 
     const handleguestAdd = () => {
@@ -170,7 +176,9 @@ function Booking() {
         setRoomList(list)
     }
   return (
-    <section className="bookingSection">
+    <div>
+        <Navbar employeeId={employee_id}/>
+        <section className="bookingSection">
         <div className="bookingContainer">
             <div className="welcome">
                 <div className="bookTitle textDiv">
@@ -386,6 +394,8 @@ function Booking() {
 ))}
         </div>
     </section>
+    </div>
+    
   )
 }
 

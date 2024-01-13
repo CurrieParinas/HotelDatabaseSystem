@@ -6,7 +6,7 @@ import { TbGridDots } from "react-icons/tb";
 
 
 
-const Navbar = () => {
+const Navbar = ({ employeeId }) => {
     let time = new Date().toLocaleTimeString()
 
     const [active, setActive] = useState('navBar')
@@ -65,7 +65,7 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li className="navItem">
-                        <a href="http://localhost:3000/dashboard" className="navLink">
+                        <a href={`http://localhost:3000/fd/dashboard/${employeeId}`} className="navLink">
                             Dashboard
                         </a>
                     </li>

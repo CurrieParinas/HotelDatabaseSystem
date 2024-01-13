@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Dashboard.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination} from "@mui/material";
+import Navbar from '../../Components/Navbar/Navbar';
 
 function Dashboard() {
   const {employee_id,employee_type} = useParams();
@@ -156,28 +157,7 @@ function Dashboard() {
     }
 
     const handleCheckOut = async (brnId) =>{
-        const brnToUpdate = {
-            brn_id: brnId,
-            check_out_date: currentDate,
-            status: "CHECKED-OUT"
-        }
-
-        try{
-            const response = await fetch('http://localhost:8080/miancurocho/brn/update', {
-                    headers:{
-                        'Accept':'application/json',
-                        'Content-Type':'application/json'
-                    },
-                    method: 'POST',
-                    body: JSON.stringify(brnToUpdate)
-            })
-            console.log(brnToUpdate)
-            window.location.reload();    
-            }catch(error){
-            //ADD FRONTEND ERROR DISPLAY HERE 
-            console.log('Checkout Error. Please Try again')
-            console.log(error)
-        }
+        navigate(`/payment/${employee_id}/${brnId}`)
     }
 
   const columns = [
@@ -208,7 +188,10 @@ function Dashboard() {
 
     //   <button onClick={handleSubmitBook}>Book</button>
     // </div>
-    <section className="dashboardSec">
+    <div>
+    <Navbar employeeId={employee_id}/>
+<section className="dashboardSec">
+        {/* <Navbar employeeId={employee_id} /> */}
         <div className="dashboardContainer">
             <div className="welcomeDB flex">
                 <div className="leftWelcome">
@@ -318,6 +301,8 @@ function Dashboard() {
             </div>
         </div>
     </section>
+    </div>
+    
     
   )
 }
