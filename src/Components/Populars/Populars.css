@@ -70,7 +70,8 @@
 .popular .secContainer .mainContent .singleRoom .roomImage img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .popular .secContainer .mainContent .singleRoom .roomImage .overlayInfo {
   position: absolute;
@@ -120,6 +121,7 @@
   font-weight: 700;
   color: var(--blackColor);
   position: relative;
+  width: -moz-max-content;
   width: max-content;
 }
 .popular .secContainer .mainContent .singleRoom .roomFooter .number::after {

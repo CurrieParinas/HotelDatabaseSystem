@@ -86,6 +86,11 @@
   font-size: 13px;
   font-weight: 500;
 }
+.home .homeCard .locationDiv input::-moz-placeholder, .home .homeCard .distDiv input::-moz-placeholder, .home .homeCard .priceDiv input::-moz-placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
+}
 .home .homeCard .locationDiv input::placeholder, .home .homeCard .distDiv input::placeholder, .home .homeCard .priceDiv input::placeholder {
   font-size: 13px;
   opacity: 0.5;

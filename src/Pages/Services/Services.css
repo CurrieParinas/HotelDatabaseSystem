@@ -102,6 +102,9 @@
 .services .servicesContainer .servicesmainContent .servicesParentDiv .servicessingleRoom .servicesFooter .flex .icon {
   color: var(--MainColor);
 }
+.services .servicesContainer .servicesmainContent .servicesParentDiv .servicessingleRoom .servicesFooter:hover {
+  background-color: #ceb86e;
+}
 
 @media screen and (min-width: 480px) {
   .services {

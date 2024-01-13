@@ -13,50 +13,151 @@ function Menu() {
 
             <div className="menumainContent menuContent grid">
                 {
-                  <div className="menuParentDiv">
-                <div className="menusingleRoom">
-                  <div className="menuImage">
-                  <h3> <center>Filler</center></h3>
-                        {/* <img src={imgSrc} alt="" /> */}
+                <div className="menuParentDiv">
+                <div className="firstRow">
+                  <div className="menusingleRoom">
+                    <div className="menuImage">
+                    <h3 className = "menuPrice"> <center>Breakfast Buffet</center></h3>
+                          {/* <img src={imgSrc} alt="" /> */}
+                    </div>
+                    <div className="menuFooter">
+                        <div className="menuText">
+                            <h6>₱1,500</h6>
+                        
+                        </div>
+                    </div>
+                    
                   </div>
-                  <div className="menuFooter">
-                      <div className="menuText">
-                          <h6>Food1</h6>
-                      
-                      </div>
+                  <div className="menusingleRoom">
+                    <div className="menuImage">
+                    <h3 className = "menuPrice"> <center>Lunch Buffet</center></h3>
+                          {/* <img src={imgSrc} alt="" /> */}
+                    </div>
+                    <div className="menuFooter">
+                        <div className="menuText">
+                            <h6>₱1,800</h6>
+                        
+                        </div>
+                    </div>
+                    
                   </div>
-                  
+                  <div className="menusingleRoom">
+                    <div className="menuImage">
+                    <h3 className = "menuPrice"> <center>Dinner Buffet</center></h3>
+                          {/* <img src={imgSrc} alt="" /> */}
+                    </div>
+                    <div className="menuFooter">
+                        <div className="menuText">
+                            <h6>₱1,800</h6>
+                        
+                        </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="menusingleRoom">
-                  <div className="menuImage">
-                  <h3> <center>Filler</center></h3>
-                        {/* <img src={imgSrc} alt="" /> */}
+                <div className="firstRow">
+                  <div className="menusingleRoom">
+                    <div className="menuImage">
+                    <h3 className = "menuPrice"> <center>In-room Dining</center></h3>
+                          {/* <img src={imgSrc} alt="" /> */}
+                    </div>
+                    <div className="menuFooter">
+                        <div className="menuText">
+                            <h6>₱1,500</h6>
+                        
+                        </div>
+                    </div>
+                    
                   </div>
-                  <div className="menuFooter">
-                      <div className="menuText">
-                          <h6>Food2</h6>
-                      
-                      </div>
+                  <div className="menusingleRoom">
+                    <div className="menuImage">
+                    <h3 className = "menuPrice"> <center>Bar and Lounge</center></h3>
+                          {/* <img src={imgSrc} alt="" /> */}
+                    </div>
+                    <div className="menuFooter">
+                        <div className="menuText">
+                            <h6>₱1,000</h6>
+                        
+                        </div>
+                    </div>
+                    
                   </div>
-                  
+                  <div className="menusingleRoom">
+                    <div className="menuImage">
+                    <h3 className = "menuPrice"> <center>Garden Tea Party</center></h3>
+                          {/* <img src={imgSrc} alt="" /> */}
+                    </div>
+                    <div className="menuFooter">
+                        <div className="menuText">
+                            <h6>₱1,500</h6>
+                        
+                        </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="menusingleRoom">
-                  <div className="menuImage">
-                  <h3> <center>Filler</center></h3>
-                        {/* <img src={imgSrc} alt="" /> */}
+
+                <div className="firstRow">
+                  <div className="menusingleRoom">
+                    <div className="menuImage">
+                    <h3 className = "menuPrice"> <center>In-room Chips</center></h3>
+                          {/* <img src={imgSrc} alt="" /> */}
+                    </div>
+                    <div className="menuFooter">
+                        <div className="menuText">
+                            <h6>₱150</h6>
+                        
+                        </div>
+                    </div>
+                    
                   </div>
-                  <div className="menuFooter">
-                      <div className="menuText">
-                          <h6>Food3</h6>
-                      
-                      </div>
+                  <div className="menusingleRoom">
+                    <div className="menuImage">
+                    <h3 className = "menuPrice"> <center>In-Room Soda</center></h3>
+                          {/* <img src={imgSrc} alt="" /> */}
+                    </div>
+                    <div className="menuFooter">
+                        <div className="menuText">
+                            <h6>₱150</h6>
+                        
+                        </div>
+                    </div>
+                    
+                  </div>
+                  <div className="menusingleRoom">
+                    <div className="menuImage">
+                    <h3 className = "menuPrice"> <center>In-Room Chocolates</center></h3>
+                          {/* <img src={imgSrc} alt="" /> */}
+                    </div>
+                    <div className="menuFooter">
+                        <div className="menuText">
+                            <h6>₱200</h6>
+                        
+                        </div>
+                    </div>
                   </div>
                 </div>
+
+
+                <div className="firstRow">
+                  <div className="menusingleRoom">
+                      <div className="menuImage">
+                      <h3 className = "menuPrice"> <center>In-Room Sparkling Water</center></h3>
+                            {/* <img src={imgSrc} alt="" /> */}
+                      </div>
+                      <div className="menuFooter">
+                          <div className="menuText">
+                              <h6>₱200</h6>
+                          
+                          </div>
+                      </div>
+                    </div>
+                  </div>
 
                 
                 
                 
                 </div> //parent div
+
+                
                 
                 }
             </div>

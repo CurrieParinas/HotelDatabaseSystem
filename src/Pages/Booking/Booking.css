@@ -82,6 +82,11 @@
   font-size: 13px;
   font-weight: 500;
 }
+.bookingSection .bookingContainer .guestInformation .name .firstNameDiv input::-moz-placeholder, .bookingSection .bookingContainer .guestInformation .name .middleNameDiv input::-moz-placeholder, .bookingSection .bookingContainer .guestInformation .name .surnameDiv input::-moz-placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
+}
 .bookingSection .bookingContainer .guestInformation .name .firstNameDiv input::placeholder, .bookingSection .bookingContainer .guestInformation .name .middleNameDiv input::placeholder, .bookingSection .bookingContainer .guestInformation .name .surnameDiv input::placeholder {
   font-size: 13px;
   opacity: 0.5;
@@ -116,6 +121,11 @@
   padding: 10px;
   font-size: 13px;
   font-weight: 500;
+}
+.bookingSection .bookingContainer .guestInformation .birthdayAndAdress .birthday input::-moz-placeholder, .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .address input::-moz-placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
 }
 .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .birthday input::placeholder, .bookingSection .bookingContainer .guestInformation .birthdayAndAdress .address input::placeholder {
   font-size: 13px;
@@ -152,6 +162,11 @@
   font-size: 13px;
   font-weight: 500;
 }
+.bookingSection .bookingContainer .guestInformation .emailNumTel .email input::-moz-placeholder, .bookingSection .bookingContainer .guestInformation .emailNumTel .number input::-moz-placeholder, .bookingSection .bookingContainer .guestInformation .emailNumTel .telephone input::-moz-placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
+}
 .bookingSection .bookingContainer .guestInformation .emailNumTel .email input::placeholder, .bookingSection .bookingContainer .guestInformation .emailNumTel .number input::placeholder, .bookingSection .bookingContainer .guestInformation .emailNumTel .telephone input::placeholder {
   font-size: 13px;
   opacity: 0.5;
@@ -186,6 +201,11 @@
   padding: 10px;
   font-size: 13px;
   font-weight: 500;
+}
+.bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomNum input::-moz-placeholder, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomType input::-moz-placeholder, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkInDate input::-moz-placeholder, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkOutDate input::-moz-placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
 }
 .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomNum input::placeholder, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .roomType input::placeholder, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkInDate input::placeholder, .bookingSection .bookingContainer .guestInformation .roomNumTypeCheckInandOut .checkOutDate input::placeholder {
   font-size: 13px;

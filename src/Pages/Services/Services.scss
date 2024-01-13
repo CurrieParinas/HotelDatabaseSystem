@@ -107,6 +107,11 @@
                                         color: var(--MainColor);
                                     }
                                 }
+
+                                &:hover {
+                                    background-color: #ceb86e;
+                                    // color: var(--whiteColor2);
+                                }
                                 }
                             
                     }
