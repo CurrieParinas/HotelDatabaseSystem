@@ -56,7 +56,7 @@
                     display: flex;
                     flex-direction: column;
                     margin: 1rem;
-                    background-color: pink;
+                    background-color: #ad974f;
                     overflow: hidden;
                     border-radius: 1rem;
                     box-shadow: 0 2px 8px 2px rgba(178,178,178,0.45);
@@ -150,7 +150,7 @@
     }
 }
 @media screen and (min-width: 320px) {
-    .roomPage {
+    .menu {
         padding-top: 17rem;
     }
 }
