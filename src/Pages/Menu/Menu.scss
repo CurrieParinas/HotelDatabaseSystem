@@ -17,7 +17,7 @@
     padding-top: 15rem;
     
     .menuContainer {
-       
+       min-height: 100vh;
         .menuHeader {
             flex-direction: column;
             align-items: flex-start;
@@ -48,68 +48,86 @@
             flex-direction: column;
             .menuParentDiv{
                 display: flex;
-                flex-direction: row;
-                .menusingleRoom {
-                    height: 15rem;
-                    width: 25rem;
-    
+                flex-direction: column;
+                .firstRow {
                     display: flex;
-                    flex-direction: column;
-                    margin: 1rem;
-                    background-color: #ad974f;
-                    overflow: hidden;
-                    border-radius: 1rem;
-                    box-shadow: 0 2px 8px 2px rgba(178,178,178,0.45);
-                    
-              
-                    .menuImage {
-                        height: 100%;
-                        width: 100%;
-                        position: relative;
-                        overflow: hidden;
-                        text-align: center;
-                            img{
-                                height: 100%;
-                                width: 100%;
-                                object-fit: cover;
-                            }
-                                h3 {
-                                    color: var(--whiteColor);
-                                    font-weight: 600;
-                                }
-                                p {
-                                    color:var(--whiteColor);
-                                    opacity: .7;
-                                    font-size: 13px;
-                                }
-                        }
-    
-                            .menuFooter {
-                             
-                                justify-content: space-between;
-                               text-align: center;
-                               height: 4rem;
-
-                               .menuText {
-                        
-                                text-align: center;
-                            }
-                                h6{
-                                    font-size: 2rem;
-                                }
-                                .flex {
-                                    font-size: 16px;
-                                    font-weight: 600;
-                                    align-items: flex-start;
-                                    transform: translateY(5px);
+                    flex-direction: row;
+                    .menusingleRoom {
+                        height: 15rem;
+                        width: 25rem;
         
-                                    .icon {
-                                        color: var(--MainColor);
+                        display: flex;
+                        flex-direction: column;
+                        margin: 1rem;
+                        background-color:#ededed;
+                        overflow: hidden;
+                        border-radius: 1rem;
+                        box-shadow: 0 2px 8px 2px rgba(158, 157, 157, 0.45);
+                        
+                  
+                        .menuImage {
+                            height: 100%;
+                            width: 100%;
+                            position: relative;
+                            overflow: hidden;
+                            text-align: center;
+                            display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            .menuPrice{
+                                
+                                color:#2e2e2e;
+                                // padding-top:5rem;
+                                font-size: 40px;
+                                }
+                                img{
+                                    height: 100%;
+                                    width: 100%;
+                                    object-fit: cover;
+                                }
+                                    h3 {
+                                        color: var(--whiteColor);
+                                        font-weight: 600;
                                     }
-                                }
-                                }
+                                    p {
+                                        color:var(--whiteColor);
+                                        opacity: .7;
+                                        font-size: 13px;
+                                    }
+                            }
+                        .menuFooter {
                             
-                    }
+                            justify-content: space-between;
+                            text-align: center;
+                            height: 4rem;
+    
+                            .menuText {
+                    
+                            text-align: center;
+                            padding-bottom:1.5rem;
+                        }
+                            h6{
+                                font-size: 30px;
+                            }
+                            .flex {
+                                font-size: 16px;
+                                font-weight: 600;
+                                align-items: flex-start;
+                                transform: translateY(5px);
+    
+                                .icon {
+                                    color: var(--MainColor);
+                                }
+                            }
+                            }
+                
+                            &:hover {
+                                background-color: #ceb86e;
+                                // color: var(--whiteColor2);
+                            }
+                        }
+                }
+                    
     
             }
             
@@ -150,7 +168,7 @@
     }
 }
 @media screen and (min-width: 320px) {
-    .menu {
+    .roomPage {
         padding-top: 17rem;
     }
 }

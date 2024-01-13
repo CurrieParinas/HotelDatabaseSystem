@@ -122,6 +122,11 @@ body.active-modal {
   font-size: 13px;
   font-weight: 500;
 }
+.modal-content .cardNumber input::-moz-placeholder, .modal-content .cvvAndEd input::-moz-placeholder, .modal-content .expDate input::-moz-placeholder, .modal-content .paymentType input::-moz-placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
+}
 .modal-content .cardNumber input::placeholder, .modal-content .cvvAndEd input::placeholder, .modal-content .expDate input::placeholder, .modal-content .paymentType input::placeholder {
   font-size: 13px;
   opacity: 0.5;

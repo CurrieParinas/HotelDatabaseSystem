@@ -17,30 +17,30 @@ const Data = [
     {
         id:1,
         imgSrc: image1,
-        bedType: 'Double',
-        roomType: 'Standard',
-        price: '1000',
+        bedType: '2 King Size Bed',
+        roomType: 'Executive',
+        price: '25,000',
     },
     {
         id:2,
         imgSrc: image2,
-        bedType: 'Full XL',
-        roomType: 'Deluxe',
-        price: '2000'
+        bedType: '2 Deluxe Twin Bed, 1 Double Deck',
+        roomType: 'Suite',
+        price: '20,000'
     },
     {
         id:3,
         imgSrc: image3,
-        bedType: 'Queen',
-        roomType: 'Executive Suite',
-        price: '3000'
+        bedType: '2 Deluxe Twin Bed',
+        roomType: 'Grand',
+        price: '15,000'
     },
     {
         id:4,
         imgSrc: image4,
-        bedType: 'King',
-        roomType: 'Presidential Suite',
-        price: '4000',
+        bedType: '1 Twin Bed',
+        roomType: 'Deluxe',
+        price: '10,000',
     },
 ]
 
@@ -62,10 +62,10 @@ const Populars = () => {
                         Discover comfort and style in every room, where luxury meets thoughtful design.
                     </p>
                 </div>
-                <div className="iconsDiv flex">
+                {/* <div className="iconsDiv flex">
                     <BsArrowLeftShort className='icon leftIcon'/>
                     <BsArrowRightShort className='icon rightIcon' />
-                </div>
+                </div> */}
             </div>
 
             <div className="mainContent popularContent grid">
@@ -77,10 +77,10 @@ const Populars = () => {
                                     <img src={imgSrc} alt="" />
                                     <div className="overlayInfo">
                                         <h3>{roomType}</h3>
-                                        <p>{bedType} size bed</p>
-                                        <div className="circleButton">
+                                        <p>{bedType}</p>
+                                        {/* <div className="circleButton">
                                             <BsArrowRightShort className='icon rightIcon' />
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 <div className="roomFooter">
@@ -92,7 +92,7 @@ const Populars = () => {
                                         <span className="flex">
                                             <span className="dot">
                                                 <BsDot className='icon'/>
-                                                ${price}
+                                                ₱{price}
                                             </span>
                                             
                                         </span>
