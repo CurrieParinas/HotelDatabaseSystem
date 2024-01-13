@@ -37,6 +37,7 @@
   .navBarSection .header .navBar {
     background: var(--greyBG);
     position: absolute;
+    height: -moz-max-content;
     height: max-content;
     padding: 1rem;
     width: 100%;

@@ -12,42 +12,48 @@ function Payroll() {
     { id: "salary", name: "Salary" },
   ];
 
-  const initialRows = [
-    {
-      "employeeId": 1,
-      "details": "details",
-      "employeeType": "Concierge",
-      "supervisor": "Roey Presas",
-      "salary": 200,
-    },
-    {
-      "employeeId": 2,
-      "details": "details",
-      "employeeType": "Kitchen",
-      "supervisor": "Roey Presas",
-      "salary": 300,
-    },
-    {
-      "employeeId": 3,
-      "details": "details",
-      "employeeType": "Housekeeping",
-      "supervisor": "Roey Presas",
-      "salary": 400,
-    },
-    {
-      "employeeId": 4,
-      "details": "details",
-      "employeeType": "Concierge",
-      "supervisor": "Roey Presas",
-      "salary": 500,
-    },
-  ];
 
-  const [rows, setRows] = useState(initialRows);
-  const [page, pageChange] = useState(0);
-  const [rowPerPage, rowPerPageChange] = useState(5);
+  const [rows, setRows] = useState([
+    {
+      employeeId: "",
+      details: "",
+      employeeType: "",
+      supervisor: "",
+      salary: "",
+    }
+  ]);
+
+
+  const [page, pageChange] = useState(10);
+  const [rowPerPage, rowPerPageChange] = useState(10);
   const [editedRows, setEditedRows] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    const getAllEmployees = async () => {
+      try {
+        let response = await fetch('http://localhost:8080/miancurocho/employee/all');
+        let employeeData = await response.json();
+  
+        const transformedData = employeeData.map(employee => ({
+          employeeId: employee.employee_id,
+          details: `${employee.first_name} ${employee.middle_name} ${employee.last_name}`,
+          employeeType: employee.employee_type,
+          supervisor: employee.supervisor,
+          salary: employee.salary
+        }));
+        
+        setRows(transformedData);
+        console.log(transformedData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    // Call the getAllEmployees function when the component mounts
+    getAllEmployees();
+  }, []);
+  
 
   const handlechangepage = (event, newpage) => {
     pageChange(newpage);
@@ -63,12 +69,30 @@ function Payroll() {
     setEditedRows({ ...editedRows, [employeeId]: true });
   }
 
-  const handleSaveSalary = (employeeId) => {
-    // You should update the corresponding employee's salary in the state or make an API call to update it
-    console.log(`Save salary for employee ${employeeId}: ${editedRows[employeeId]}`);
-    setIsEditing(false);
-    setEditedRows({ ...editedRows, [employeeId]: false });
-  }
+  const handleSaveSalary = async (employeeId, salary) => {
+    try {
+        const response = await fetch(`http://localhost:8080/miancurocho/employee/updateSalary/${employeeId}?salary=${salary}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+
+        const updatedEmployeeSalary = await response.json();
+        console.log('Updated Employee Salary:', updatedEmployeeSalary);
+
+        setIsEditing(false);
+        setEditedRows({ ...editedRows, [employeeId]: false });
+
+    } catch (error) {
+        console.error('Failed to update salary:', error);
+    }
+};
+
 
   return (
     <section className="payrollSection">
@@ -101,7 +125,7 @@ function Payroll() {
                 </TableHead>
                 <TableBody>
                   {rows
-                    .slice(page * rowPerPage, page * rowPerPage + rowPerPage)
+                    // .slice(page * rowPerPage, page * rowPerPage + rowPerPage)
                     .map((row, i) => {
                       return (
                         <TableRow key={i}>
@@ -129,7 +153,7 @@ function Payroll() {
                                           <button
                                             className="btn"
                                             style={{ marginLeft: "5px" }}
-                                            onClick={() => handleSaveSalary(row.employeeId)}
+                                            onClick={() => handleSaveSalary(row.employeeId, row.salary)}
                                           >
                                             Save
                                           </button>
@@ -144,7 +168,7 @@ function Payroll() {
                                           <button
                                             className="btn"
                                             style={{ marginLeft: "5px" }}
-                                            onClick={() => handleEditSalary(row.employeeId)}
+                                            onClick={() => handleEditSalary(row.employeeId, row.salary)}
                                           >
                                             Edit Salary
                                           </button>
@@ -164,15 +188,15 @@ function Payroll() {
                 </TableBody>
               </Table>
             </TableContainer>
-            <TablePagination
-              rowPerPageOption={[5, 10, 25]}
+            {/* <TablePagination
+              rowPerPageOption={[5, 10, 25,51]}
               page={page}
               count={rows.length}
               rowsPerPage={rowPerPage}
               component="div"
               onPageChange={handlechangepage}
               onRowsPerPageChange={handleRowsPerPage}
-            ></TablePagination>
+            ></TablePagination> */}
           </Paper>
         </div>
       </div>

@@ -23,6 +23,9 @@
   padding-top: 10vh;
   width: 90vw;
 }
+.payrollSection .payrollContainer .welcomePR {
+  padding-top: 5vh;
+}
 .payrollSection .guestList {
   display: flex;
   justify-content: center;
@@ -41,6 +44,11 @@
   font-size: 13px;
   font-weight: 500;
   margin: 1rem;
+}
+.salaryColumn .editSalaryColumn .salaryInput input::-moz-placeholder {
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 400;
 }
 .salaryColumn .editSalaryColumn .salaryInput input::placeholder {
   font-size: 13px;

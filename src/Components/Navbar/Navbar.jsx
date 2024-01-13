@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './Navbar.css'
 import Logo from '../../Assets/logo2nobg.png'
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -6,8 +6,17 @@ import { TbGridDots } from "react-icons/tb";
 
 
 
-const Navbar = ({ employeeId }) => {
-    let time = new Date().toLocaleTimeString()
+const Navbar = () => {
+    const [time, setTime] = useState(new Date().toLocaleTimeString());
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+        setTime(new Date().toLocaleTimeString());
+        }, 1000); 
+
+        return () => clearInterval(intervalId); 
+    }, []); 
+
 
     const [active, setActive] = useState('navBar')
     const showNav=()=> {
@@ -53,7 +62,7 @@ const Navbar = ({ employeeId }) => {
                         <a href="http://localhost:3000/rooms" className="navLink">
                             Rooms
                         </a>
-                    </li>
+                    </li>   
                     <li className="navItem">
                         <a href="http://localhost:3000/menu" className="navLink">
                             Menu
@@ -65,8 +74,13 @@ const Navbar = ({ employeeId }) => {
                         </a>
                     </li>
                     <li className="navItem">
-                        <a href={`http://localhost:3000/fd/dashboard/${employeeId}`} className="navLink">
+                        <a href="http://localhost:3000/dashboard" className="navLink">
                             Dashboard
+                        </a>
+                    </li>
+                    <li className="navItem">
+                        <a href="http://localhost:3000/payroll" className="navLink">
+                            Payroll
                         </a>
                     </li>
                     <div className="headerBtns flex">
