@@ -16,6 +16,9 @@
 .services {
   padding-top: 15rem;
 }
+.services .servicesContainer {
+  min-height: 100vh;
+}
 .services .servicesContainer .servicesHeader {
   flex-direction: column;
   align-items: flex-start;
@@ -82,7 +85,7 @@
 .services .servicesContainer .servicesmainContent .servicesParentDiv .servicessingleRoom .servicesFooter {
   justify-content: space-between;
   text-align: center;
-  height: 4rem;
+  height: 5rem;
 }
 .services .servicesContainer .servicesmainContent .servicesParentDiv .servicessingleRoom .servicesFooter .servicesText {
   text-align: center;
@@ -116,7 +119,7 @@
     text-align: start;
     max-width: 70%;
   }
-  .services .servicesContainer .servicesHeader .menuiconsDiv {
+  .services .servicesContainer .servicesHeader .servicesiconsDiv {
     justify-content: flex-end;
   }
 }
