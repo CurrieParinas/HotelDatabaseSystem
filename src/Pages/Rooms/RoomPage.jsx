@@ -27,28 +27,28 @@ const RoomPages = () => {
             imgSrc: image1,
             bedType: 'Double',
             roomType: 'Standard',
-            price: '1000',
+            price: '10000',
         },
         {
             id:2,
             imgSrc: image2,
             bedType: 'Full XL',
             roomType: 'Deluxe',
-            price: '2000'
+            price: '15000'
         },
         {
             id:3,
             imgSrc: image3,
             bedType: 'Queen',
             roomType: 'Executive Suite',
-            price: '3000'
+            price: '20000'
         },
         {
             id:4,
             imgSrc: image4,
             bedType: 'King',
             roomType: 'Presidential Suite',
-            price: '4000',
+            price: '25000',
         },
     ]
 
@@ -60,15 +60,10 @@ const RoomPages = () => {
     <section className="roomPage section container">
         <div className="roomsecContainer">
             <div className="roomsecHeader">
-            <h2 className=  "roomsecTitle">Rooms</h2>
-            <p>
-                        Discover comfort and style in every room, where luxury meets thoughtful design.
-                    </p>
-                {/* <div className="roomtextDiv">
-                       <h2 className="roomsecTitle">Rooms</h2>
-                    
-                </div> */}
-               
+                <h2 className=  "roomsecTitle">Rooms</h2>
+                <p>
+                    Discover comfort and style in every room, where luxury meets thoughtful design.
+                </p>
             </div>
 
             <div className="roommainContent roomContent">
@@ -79,16 +74,16 @@ const RoomPages = () => {
                         return (
                             
                             <div className="roomsingleRoom">
-                                 <div className="roomsingleRoomContent">
-                                 <div className="roomroomImage">
+                                <div className="roomsingleRoomContent">
+                                    <div className="roomroomImage">
                                         <img src={imgSrc} alt="" />
-                                 </div>
+                                    </div>
                                 <div classname="roomroomInfo">
                                     
                                     <h1 className="roomroomText">{roomType} </h1>
-                                    <p className="roomroomPrice">${price} </p>
+                                    <p className="roomroomPrice" style={{paddingTop:"1rem"}}>₱ {price}.00 </p>
                                     <p className="roomroomDesc">
-                                    Welcome to our {roomType} room – a haven of comfort and relaxation that embodies the essence of modern hospitality. 
+                                    Welcome to our <b>{roomType} room</b> – a haven of comfort and relaxation that embodies the essence of modern hospitality. 
                                     Designed with your utmost comfort in mind, our {roomType} Room offers a perfect blend of style, functionality, and tranquility.
                                     
                                         <div className="amenities flex">
@@ -117,14 +112,11 @@ const RoomPages = () => {
                                                 <MdOutlineKey className='icon'/>
                                                 <small>Access to Pool, Gym, Sky Garden, Study Hall</small>
                                             </div>
-                                       
+                                        
                                     </div>
                                     </p>
-                               </div>
-                                    
-                                 
-                              
-                             </div>
+                                </div>
+                            </div>
                          </div>
                         )
                     })

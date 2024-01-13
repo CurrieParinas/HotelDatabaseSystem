@@ -1,5 +1,6 @@
 import React, {useEffect , useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import './RoomBooking.css';
 
 function RoomBooking() {
     const [rooms, setRooms] = useState([]);
@@ -30,24 +31,38 @@ function RoomBooking() {
     
     
     return (
-        <div>
-            <h1>Rooms</h1>
+        <div className = "roomParent">
+            <div className="roomContainer">
             <br></br>
+            <br></br>
+            <div className="roomHeader">
+                <h1 >Available Rooms</h1>
+            </div>
+            <div className='cardDiv'>
             {rooms.map((room) => (
-                <div key={room.ROOM_NUMBER}>
-                    <p>Room Number: {room.ROOM_NUMBER}</p>
-                    <p>Room Type: {room.ROOM_NAME}</p>
-                    <p>Max Guests: {room.MAX_GUESTS}</p>
-                    <p>Beds: {room.BEDS}</p>
-                    <p>Area: {room.AREA}</p>
-                    <p>Price: {room.PRICE}</p>
-                    <p>Description: {room.DESCRIPTION}</p>
+                <div className = "roomCard">
 
-                    
-                    <button onClick={() => handleSubmitBook(room.ROOM_NUMBER, room.ROOM_NAME)}>Book</button>
+                <div  key={room.ROOM_NUMBER}>
+                    <div className="roomContent">
+                    <p className="roomNumber">Room Number: {room.ROOM_NUMBER}</p>
+                    <p className="roomType">Room Type: {room.ROOM_NAME}</p>
+                    <p className="roomType">Price: ₱{room.PRICE}.00 </p>
+                    <p className="roomDeets">Max Guests: {room.MAX_GUESTS}</p>
+                    <p>Beds: {room.BEDS}</p>
+                    <p>Area: {room.AREA} square meters</p>
+                    <br />
+                    <p className="roomDescription"><i>{room.DESCRIPTION}</i></p>
+                    </div>
+
+                    <div className='roomButtonDiv'>
+                    <button className = "roomButton btn" onClick={() => handleSubmitBook(room.ROOM_NUMBER, room.ROOM_NAME)}>Book</button>
                     {/* Add more properties as needed */}
+                    </div>
+                </div>
                 </div>
             ))}
+            </div>
+            </div>
         </div>
     );
     
