@@ -1,1 +1,154 @@
-/*# sourceMappingURL=Menu.css.map */
+/* Colors */
+:root {
+  --MainColor: #ad974f;
+  --HoverColor: #8E793E;
+  --DarkGrey: #231F20;
+  --DirtyWhite: #EAEAEA;
+  --whiteColor: #ffffff;
+  --blackColor: #2e2e2e;
+  --textColor: #9f9f92;
+  --whiteColor2: #ededed;
+  --greyBG: #231F20;
+  --greyText: #bfbfbf;
+  --inputColor: #f8f6f7;
+}
+
+.menu {
+  padding-top: 15rem;
+}
+.menu .menuContainer .menuHeader {
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+}
+.menu .menuContainer .menuHeader .menusecTitle {
+  color: var(--blackColor);
+  line-height: 1.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  font-size: 60px;
+}
+.menu .menuContainer .menuHeader p {
+  padding-top: 3rem;
+  text-align: center;
+  font-size: 20px;
+  color: var(--textColor);
+  font-weight: 500;
+}
+.menu .menuContainer .menumainContent {
+  padding: 2rem 0;
+  gap: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.menu .menuContainer .menumainContent .menuParentDiv {
+  display: flex;
+  flex-direction: row;
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom {
+  height: 15rem;
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  background-color: pink;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.45);
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom .menuImage {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom .menuImage img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom .menuImage h3 {
+  color: var(--whiteColor);
+  font-weight: 600;
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom .menuImage p {
+  color: var(--whiteColor);
+  opacity: 0.7;
+  font-size: 13px;
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom .menuFooter {
+  justify-content: space-between;
+  text-align: center;
+  height: 4rem;
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom .menuFooter .menuText {
+  text-align: center;
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom .menuFooter h6 {
+  font-size: 2rem;
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom .menuFooter .flex {
+  font-size: 16px;
+  font-weight: 600;
+  align-items: flex-start;
+  transform: translateY(5px);
+}
+.menu .menuContainer .menumainContent .menuParentDiv .menusingleRoom .menuFooter .flex .icon {
+  color: var(--MainColor);
+}
+
+@media screen and (min-width: 480px) {
+  .menu {
+    padding-top: 10rem;
+  }
+}
+@media screen and (min-width: 556px) {
+  .menu .menuContainer .menuHeader {
+    widows: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .menu .menuContainer .menuHeader .menutextDiv {
+    text-align: start;
+    max-width: 70%;
+  }
+  .menu .menuContainer .menuHeader .menuiconsDiv {
+    justify-content: flex-end;
+  }
+}
+@media screen and (min-width: 320px) {
+  .roomPage {
+    padding-top: 17rem;
+  }
+}
+@media screen and (min-width: 480px) {
+  .menu {
+    padding-top: 10rem;
+  }
+}
+@media screen and (min-width: 720px) {
+  .menu {
+    padding-top: 7rem;
+  }
+}
+@media screen and (min-width: 884px) {
+  .menuContent {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .menu {
+    padding-top: 10rem;
+  }
+  .menu .menuContainer .menuHeader .menutextDiv .menusecTitle {
+    font-size: 2.2rem;
+  }
+  .menu .menuContainer .menuHeader .menutextDiv p {
+    font-size: 15px;
+  }
+}/*# sourceMappingURL=Menu.css.map */
