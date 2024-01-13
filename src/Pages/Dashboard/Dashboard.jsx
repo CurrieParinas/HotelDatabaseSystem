@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './Dashboard.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination} from "@mui/material";
-
+import Navbar from '../../Components/Navbar/Navbar';
+import CancelIcon from '@mui/icons-material/Cancel';
 function Dashboard() {
-  const {employee_id} = useParams();
+  const {employee_id,employee_type} = useParams();
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
+  const [bookedBRNs, setBookedBRNs] = useState([]);
+  const [currentDate, setCurrentDate] = useState([]);
   const [brn,setBRN] = useState({
     brn_id: '',
     employee_id : '',
@@ -16,34 +19,50 @@ function Dashboard() {
   
 
   useEffect(()=>{
-    getAvailableRooms()
+    getBookedRooms()
     brn.employee_id = employee_id;
     getCurrentDate()
     generateBRNID()
+    console.log(employee_type)
   },[])
-  const getAvailableRooms = async () => {
-    try{
-        let response = await fetch('http://localhost:8080/miancurocho/room/allAvailableRooms')
-        let roomsData = await response.json()
-        console.log(roomsData)
-        setRooms(roomsData)
+  const getBookedRooms = async () => {
+    try {
+        let response = await fetch('http://localhost:8080/miancurocho/room/bookedOrCheckedInRooms');
+        let roomsData = await response.json();
+        console.log(roomsData);
+        setRooms(roomsData);
 
-        // Generate rows dynamically based on roomsData
-        const generatedRows = roomsData.map((room) => ({
-            roomNumber: room.ROOM_NUMBER,
-            details: 'details', // You may need to fetch these details from the server
-            kitchen: 'kitchenServiceOrdered',
-            concierge: 'conciergeServiceOrdered',
-            housekeeping: 'housekeepingServiceOrdered',
-            status: 'booked-in',
+        //GET BRN DETAILS OF ALL
+        const generatedRows = await Promise.all(roomsData.map(async (room) => {
+            try {
+                let brnResponse = await fetch(`http://localhost:8080/miancurocho/brn/${room.BRN_ID}`);
+                let brnData = await brnResponse.json();
+                console.log(brnData);
+
+                let primaryGuestResponse = await fetch(`http://localhost:8080/miancurocho/guest/primaryGuestOfBRN/${room.BRN_ID}`)
+                let primaryGuestData = await primaryGuestResponse.json();
+                console.log(primaryGuestData)
+                return {
+                    brn_id: brnData.brn_id,
+                    roomNumber: room.ROOM_NUMBER,
+                    details: primaryGuestData[0].FIRST_NAME +" "+ primaryGuestData[0].MIDDLE_NAME + " "+ primaryGuestData[0].LAST_NAME, // You may need to fetch these details from the server
+                    kitchen: 'kitchenServiceOrdered',
+                    concierge: 'conciergeServiceOrdered',
+                    housekeeping: 'housekeepingServiceOrdered',
+                    status: brnData.status
+                };
+            } catch (brnError) {
+                console.error(brnError);
+                return null; // Handle the error or provide a default value
+            }
         }));
 
         setRows(generatedRows);
-    }catch(error){
-        console.error(error)
+        console.log(generatedRows)
+    } catch (error) {
+        console.error(error);
     }
-    
-}
+};
   const getCurrentDate = () => {
 
     const currentDate = new Date();
@@ -55,6 +74,8 @@ function Dashboard() {
     
     brn.booking_date = formattedDate
     console.log(brn.booking_date)
+    setCurrentDate(formattedDate)
+    console.log(currentDate)
     
   }
 
@@ -100,7 +121,7 @@ function Dashboard() {
               body: JSON.stringify(brn)
       })
       console.log(brn)
-      navigate(`/booking/${employee_id}/${brn.brn_id}`)    
+      navigate(`/roombooking/${employee_id}/${brn.brn_id}`)    
           
       }catch(error){
         //ADD FRONTEND ERROR DISPLAY HERE 
@@ -109,6 +130,36 @@ function Dashboard() {
     }
 
   }
+
+    const handleCheckIn = async (brnId) =>{
+        const brnToUpdate = {
+            brn_id: brnId,
+            check_in_date: currentDate,
+            status: "CHECKED-IN"
+        }
+
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/brn/update', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(brnToUpdate)
+            })
+            console.log(brnToUpdate)
+            window.location.reload();    
+            }catch(error){
+            //ADD FRONTEND ERROR DISPLAY HERE 
+            console.log('Checkin Error. Please Try again')
+            console.log(error)
+        }
+    }
+
+    const handleCheckOut = async (brnId) =>{
+        navigate(`/payment/${employee_id}/${brnId}`)
+    }
+
   const columns = [
     {id:"roomNumber", name:"Room Number"},
     {id:"details", name:"Details"},
@@ -131,13 +182,83 @@ function Dashboard() {
     rowPerPageChange(+event.target.value)
     pageChange(0)
   }
+  const [selectedColumn, setSelectedColumn] = useState(null);
 
+  const toggleModal = (columnId) => {
+    setModal(!modal);
+    setSelectedColumn(columnId);
+  };
+  const [modal, setModal] = useState(false);
+  if(modal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
+
+  
+  const [selectedService, setSelectedService] = useState('');
+  const [quantity, setQuantity] = useState([])
+  const [price, setPrice] = useState([])
+  const handleSelectChange = (event) => {
+    const selectedOption = event.target.value;
+    setSelectedService(selectedOption);
+    console.log(`Selected Service: ${selectedOption}`);
+  };
+
+  const handleInputChange = (event) => {
+    const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        if (name === 'quantity'){
+            setQuantity(value);
+            console.log(quantity)
+        } else if (name === 'price'){
+            setPrice(value)
+        }
+  }
+
+  const handleAddService = (brnId) => {
+    addCharge(brnId)
+  };
+
+
+  const addCharge = async (brnId) => {
+    const updatedCharge ={
+        brn_id: brnId,
+        room_number: ""
+    }
+    try{
+        const response = await fetch('http://localhost:8080/miancurocho/charge/add', {
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(updatedCharge)
+        })
+        console.log(updatedCharge)
+        // navigate(`/booking/${employee_id}/${brn.brn_id}`)    
+            
+        }catch(error){
+          //ADD FRONTEND ERROR DISPLAY HERE 
+          console.log('Add Charge Error. Please Try again')
+          console.log(error)
+      }
+}
+  const handleAddToAccount = (brnId) => {
+    
+
+  }
   return (
     // <div className='dashboard'><h1>Dashboard</h1>
 
     //   <button onClick={handleSubmitBook}>Book</button>
     // </div>
-    <section className="dashboardSec">
+    <div>
+    <Navbar employeeId={employee_id}/>
+<section className="dashboardSec">
+        {/* <Navbar employeeId={employee_id} /> */}
         <div className="dashboardContainer">
             <div className="welcomeDB flex">
                 <div className="leftWelcome">
@@ -165,55 +286,84 @@ function Dashboard() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                            {rows
-                            .slice(page * rowPerPage, page * rowPerPage + rowPerPage)
-                            .map((row, i) => {
-                                return (
-                                <TableRow key={i}>
-                                    {columns.map((column, j) => {
-                                    let value = row[column.id];
+    {rows
+        .slice(page * rowPerPage, page * rowPerPage + rowPerPage)
+        .map((row, i) => (
+            <TableRow key={row.brn_id+"-"+i}>
+                {columns.map((column, j) => {
+                    let value = row[column.id];
 
-                                    // Render "Add" button only for specific columns
-                                    if (["concierge", "kitchen", "housekeeping"].includes(column.id)) {
-                                        return (
-                                        <TableCell key={j} align="center" 
-                                            >
-                                            <div className="cellDiv" style={{ display: "flex", alignItems:"center",justifyContent:"center", flexDirection: "column" }}>
-                                                {value}
-                                                <button className='btn' style={{width:"100px", margin:".5rem"}}>
-                                                Add
-                                                </button>
-                                            </div>
-                                        </TableCell>
-                                        );
-                                    }
-                                    if (["status"].includes(column.id)) {
-                                        return (
-                                        <TableCell key={j} align="center" 
-                                            >
-                                            <div className="cellDiv" style={{ display: "flex", alignItems:"center",justifyContent:"center", flexDirection: "column" }}>
-                                                {value}
-                                                <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem"}}>
-                                                Check-In
-                                                </button>
-                                                <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem", backgroundColor:"#231F20", color:"#ad974f"}}>
-                                                Check-Out
-                                                </button>
-                                            </div>
-                                        </TableCell>
-                                        );
-                                    }
-
+                    // Render "Add" button only for specific columns
+                    return (
+                        <TableCell key={j} align="center">
+                            {(() => {
+                                if ((employee_type === 'k' && column.id === 'kitchen') || (employee_type === 'S' && column.id === 'kitchen')) {
                                     return (
-                                        <TableCell key={j} align="center">
-                                        {value}
-                                        </TableCell>
+                                        <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+                                            {value}
+                                            <button
+                                                className='btn'
+                                                style={{ width: "100px", margin: ".5rem" }}
+                                                onClick={() => {
+                                                    toggleModal(column.id);
+                                                    handleAddService(row.brn_id);
+                                                }}>
+                                                Add 
+                                            </button>
+                                        </div>
                                     );
-                                    })}
-                                </TableRow>
+                                } else if( (employee_type === 'c' && column.id === 'concierge')|| (employee_type === 'S' && column.id === 'concierge')){
+                                    return (
+                                        <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+                                            {value}
+                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }} onClick={() => {
+                                                    toggleModal(column.id);
+                                                    handleAddService(row.brn_id);
+                                                }}>
+                                                Add 
+                                            </button>
+                                        </div>
                                     );
-                                })}
-                            </TableBody>
+                                }
+                                else if( (employee_type === 'h' && column.id === 'housekeeping')|| (employee_type === 'S' && column.id === 'housekeeping')){
+                                    return (
+                                        <div className="cellDiv" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+                                            {value}
+                                            <button className='btn' style={{ width: "100px", margin: ".5rem" }} onClick={() => {
+                                                    toggleModal(column.id);
+                                                    handleAddService(row.brn_id);
+                                                }}>
+                                                Add 
+                                            </button>
+                                        </div>
+                                    );
+                                }
+                                else {
+                                    if ((employee_type === "fd" && ["status"].includes(column.id))|| (employee_type === "S" && ["status"].includes(column.id))) {
+                                        return (
+                                            <div className="cellDiv" style={{ display: "flex", alignItems:"center",justifyContent:"center", flexDirection: "column" }}>
+                                                {value}
+                                                <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem"}} onClick={() => handleCheckIn(row.brn_id)}>
+                                                    Check-In
+                                                </button>
+                                                <button className='btn' style={{width:"120px", margin:".5rem", fontSize:".8rem", backgroundColor:"#231F20", color:"#ad974f"}}onClick={() => handleCheckOut(row.brn_id)}>
+                                                    Check-Out
+                                                </button>
+                                            </div>
+                                        );
+                                    } else {
+                                        return value;
+                                    }
+                                }
+                            })()}
+                        </TableCell>
+                    );
+                })}
+            </TableRow>
+        ))
+    }
+</TableBody>
+
                         </Table>
                     </TableContainer>
                     <TablePagination
@@ -229,7 +379,129 @@ function Dashboard() {
                 </Paper>
             </div>
         </div>
+
+        {modal && (
+        <div className="modal">
+            <div onClick={toggleModal} className="overlay">
+
+            </div>
+            <div className="modal-content">
+                <CancelIcon 
+                className="close-modal" 
+                onClick={toggleModal}
+                style={{fontSize:"2.5rem"}}
+                />
+                {selectedColumn === "kitchen" && (
+                    <div className="cardNumberInput">
+                        <div className="paymentType" >
+                            <label htmlFor="kitchenOrders">Available services:  </label>
+                            <select id="paymentType"
+                                name="payment"
+                                value={selectedService}
+                                onChange={handleSelectChange}>
+                                <option value="10">Breakfast Buffet</option>
+                                <option value="11">Lunch Buffet</option>
+                                <option value="12">Dinner Buffet</option>
+                                <option value="13">In-room Dining</option>
+                                <option value="17">Bar and Lounge</option>
+                                <option value="18">Garden Tea Party</option>
+                            </select>
+                        </div>
+                        <div className="cvvAndEd">
+                            <label htmlFor="quantity">Quantity: </label>
+                            <input
+                            name = "quantity"
+                            type="number"
+                            placeholder='123'
+                            value={quantity}
+
+                            onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className="cardNumber">
+                            <label htmlFor="price">Price: </label>
+                            <input
+                            name = "price"
+                            type="number"
+                            placeholder='$$$'
+                            value={price}
+                            onChange={handleInputChange}
+                            />
+                        </div>
+                    </div>
+                )}
+                {selectedColumn === "concierge" && (
+                    <div className="cardNumberInput">
+                    <div className="paymentType" >
+                        <label htmlFor="conciergeOrders">Available services:  </label>
+                        <select id="paymentType" name="payment">
+                            <option value="massageTherapy">Massage Therapy</option>
+                            <option value="facialTherapy">Facial Therapy</option>
+                            <option value="waterTherapy">Water Therapy</option>
+                            <option value="eventPlanning">Event Planning</option>
+                            <option value="islandHopping">Island Hopping</option>
+                            <option value="dayTourLand">Day Tour (Land)</option>
+                            <option value="airportTransfers">Airport Transfers</option>
+                            <option value="carRentals">Car Rentals</option>
+                            <option value="chaufferServices">Chauffer Services</option>
+                        </select>
+                    </div>
+                    <div className="cvvAndEd">
+                        <label htmlFor="quantity">Quantity: </label>
+                        <input
+                        type="number"
+                        placeholder='123'
+                        />
+                    </div>
+                    <div className="cardNumber">
+                        <label htmlFor="price">Price: </label>
+                        <input
+                        type="number"
+                        placeholder='$$$'
+                        />
+                    </div>
+                </div>
+                )}
+                {selectedColumn === "housekeeping" && (
+                    <div className="cardNumberInput">
+                    <div className="paymentType" >
+                        <label htmlFor="housekeepingOrders">Available services:  </label>
+                        <select id="paymentType" name="payment">
+                            <option value="roomCleaning">Room Cleaning</option>
+                            <option value="laundryServices">Laundry Services</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="restockingAmenities">Restocking Amenities</option>
+                            <option value="inRoomChips">In Room Chips</option>
+                            <option value="inRoomSoda">In Room Soda</option>
+                            <option value="inRoomSparklingWater">In Room Sparkling Water</option>
+                            <option value="inRoomChocolates">In Room Chocolates</option>
+                        </select>
+                    </div>
+                    <div className="cvvAndEd">
+                        <label htmlFor="quantity">Quantity: </label>
+                        <input
+                        type="number"
+                        placeholder='123'
+                        />
+                    </div>
+                    <div className="cardNumber">
+                        <label htmlFor="price">Price: </label>
+                        <input
+                        type="number"
+                        placeholder='$$$'
+                        />
+                    </div>
+                </div>
+                )}
+                <div className="proceedToPayment">
+                    <button className="proctopay btn " onClick={handleAddToAccount}>Add to account</button>
+                </div>
+            </div>
+        </div>
+        )}
     </section>
+    </div>
+    
     
   )
 }

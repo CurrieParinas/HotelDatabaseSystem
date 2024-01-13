@@ -37,25 +37,22 @@ const Footer = () => {
                     Information
                 </span>
                 <li>
-                    <a href="">Home</a>
+                    <a href="http://localhost:3000">Home</a>
                 </li>
                 <li>
-                    <a href="">Book</a>
+                    <a href="http://localhost:3000/rooms">Rooms</a>
                 </li>
                 <li>
-                    <a href="">Amenities</a>
-                </li>
-                <li>
-                    <a href="">Rates</a>
+                    <a href="http://localhost:3000/services">Services</a>
                 </li>
             </div>
             <div className="footerLinks">
                 <span className="linkTitle">
                     Helpful Links
                 </span>
-                <li>
+                {/* <li>
                     <a href="">Rooms</a>
-                </li>
+                </li> */}
                 <li>
                     <a href="">Customer Service</a>
                 </li>

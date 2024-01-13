@@ -4,16 +4,15 @@ import './Booking.css'
 
 import { CiCircleRemove } from "react-icons/ci";
 import { useNavigate, useParams } from 'react-router-dom';
+import Navbar from '../../Components/Navbar/Navbar';
 
 function Booking() {
     const [guestList, setGuestList] = useState([])
-    const {employee_id} = useParams();
-    const {brn_id} = useParams();
+    const {brn_id, room_number,employee_id} = useParams();
     const navigate = useNavigate();
     const [charge,setCharge] = useState({
         brn_id: brn_id,
         room_number : '',
-        cost : ''
     })
 
     const initialInputState = {
@@ -24,7 +23,6 @@ function Booking() {
         inputAddress: '',
         inputContactNo: '',
         inputEmail: '',
-        inputAge: ''
     };
     
     const [inputFields, setInputFields] = useState(initialInputState);
@@ -65,7 +63,6 @@ function Booking() {
             address: inputFields.inputAddress,
             contact_number: inputFields.inputContactNo,
             email_address:inputFields.inputEmail,
-            age: inputFields.inputAge,
             guest_type: 'P'
         };
         
@@ -108,10 +105,42 @@ function Booking() {
         }
     };
 
+    const addCharge = async (e) => {
+        const updatedCharge ={
+            brn_id: charge.brn_id,
+            room_number: room_number
+        }
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/charge/add', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(updatedCharge)
+            })
+            console.log(updatedCharge)
+            // navigate(`/booking/${employee_id}/${brn.brn_id}`)    
+                
+            }catch(error){
+              //ADD FRONTEND ERROR DISPLAY HERE 
+              console.log('Add Charge Error. Please Try again')
+              console.log(error)
+          }
+    }
+
     const handleBookin = () => {
-        addPrimaryGuest()
-        addSecondaryGuests()
-        navigate(`/fd/dashboard/${employee_id}`)
+
+        const allFieldsValid = Object.values(inputFields).every(value => value && value.length > 0);
+        if(allFieldsValid){
+            addCharge()
+            addPrimaryGuest()
+            addSecondaryGuests()
+            navigate(`/fd/dashboard/${employee_id}`)
+        }else{
+            console.log("Please enter all fields")
+        }
+       
     }
 
     const handleguestAdd = () => {
@@ -147,7 +176,9 @@ function Booking() {
         setRoomList(list)
     }
   return (
-    <section className="bookingSection">
+    <div>
+        <Navbar employeeId={employee_id}/>
+        <section className="bookingSection">
         <div className="bookingContainer">
             <div className="welcome">
                 <div className="bookTitle textDiv">
@@ -203,19 +234,19 @@ function Booking() {
                         <label htmlFor="middleName">Number</label>
                         <input name="inputContactNo" value={inputFields.inputContactNo} type="text" placeholder='09123456789' onChange={handleChange}/>
                     </div>
-                    <div className="telephone">
+                    {/* <div className="telephone">
                         <label htmlFor="telephone">Age</label>
                         <input name="inputAge" value={inputFields.inputAge} type="text" placeholder='21' onChange={handleChange}/>
-                    </div>
+                    </div> */}
                 </div>
-                <div className="roomNumTypeCheckInandOut">
+                {/* <div className="roomNumTypeCheckInandOut">
                     <div className="roomType">
                         <label htmlFor="roomType">Room Type</label>
                         <input type="text" placeholder='Deluxe' />
                     </div>
                     <div className="roomNum">
                         <label htmlFor="roomNum">Room Number</label>
-                        <input type="text" placeholder='21' />
+                        <input name="inputRoomNumber" value={inputFields.inputRoomNumber}type="text" placeholder='21'onChange={handleChange} />
                     </div>
                     <div className="checkInDate">
                         <label htmlFor="checkInDate">Check-In Date</label>
@@ -225,9 +256,9 @@ function Booking() {
                         <label htmlFor="checkOutDate">Check-Out Date</label>
                         <input type="text" placeholder='YYYY-MM-DD' />
                     </div>
-                </div>
+                </div> */}
                 
-                {roomList.map((singleRoom, index) => (
+                {/* {roomList.map((singleRoom, index) => (
                 <div className="roomNumTypeCheckInandOut">
                     <div className="roomType">
                         <label htmlFor="roomType">Room Type</label>
@@ -249,13 +280,13 @@ function Booking() {
                         <CiCircleRemove className='icon removeIcon' onClick={handleRoomRemove}/>
                     </div>
                 </div>
-                ))}
+                ))} */}
             </div>
             {guestList.length === 0 && (
                 <div className="addAndBookButton">
-                    <button className="addMoreGuest btn" onClick={handleRoomAdd}>
+                    {/* <button className="addMoreGuest btn" onClick={handleRoomAdd}>
                         <p>Add another room</p>
-                    </button>
+                    </button> */}
                     <button className="addMoreGuest btn" onClick={handleguestAdd}>
                         <p>Add a guest</p>
                     </button>
@@ -264,16 +295,19 @@ function Booking() {
                     </button>
                 </div>
             )}
-            {guestList.length !== 0 && (
+            {/* {guestList.length !== 0 && (
             <div className="addAndBookButton">
                 <button className="addMoreGuest btn" onClick={handleRoomAdd} style={{marginRight: "0"}}>
                     <p>Add another room</p>
                 </button>
             </div>            
-            )}
+            )} */}
             {guestList.map((singleService, index) => (
     <div className="secondaryGuestParentDiv" key={index}>
         <div className="guestInformation">
+            <div className="primaryGuest">
+                <h1><i>Additional Guest</i></h1>
+            </div>
             {/* ... (other elements) ... */}
             <div className="name">
                 <div className="firstNameDiv">
@@ -334,11 +368,11 @@ function Booking() {
                   <input name='contact_number' type="text" placeholder='09123456789' value={singleService.contact_number}
                         onChange={(e) => handleChange(e, index)}/>
               </div>
-              <div className="telephone">
+              {/* <div className="telephone">
                   <label htmlFor="telephone">Age</label>
                   <input name='age' type="text" placeholder='21' value={singleService.age}
                         onChange={(e) => handleChange(e, index)}/>
-              </div>
+              </div> */}
           </div>
         </div>
         <div className="addAndBookButton">
@@ -360,6 +394,8 @@ function Booking() {
 ))}
         </div>
     </section>
+    </div>
+    
   )
 }
 

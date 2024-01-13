@@ -1,0 +1,93 @@
+:root {
+    --MainColor: #ad974f;
+    --HoverColor: #8E793E;
+    --DarkGrey: #231F20;
+    --DirtyWhite: #EAEAEA;
+    --whiteColor: #ffffff;
+    --blackColor: #2e2e2e;
+    --textColor: #9f9f92;
+    --whiteColor2: #ededed;
+    --greyBG: #231F20;
+    --greyText: #bfbfbf;
+    --inputColor: #f8f6f7;
+  }
+
+
+  
+  .roomCard{
+    width: 90vh;
+    min-height: 40vh;
+    border-radius: 20px;
+    outline:#9f9f92;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+-webkit-box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+-moz-box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+  }
+
+  .roomCard:hover {
+    background-color: #f4f4f4;
+  }
+  .roomParent {
+    display: flex;
+    justify-content: center;
+}
+
+.roomContainer {
+    width: 90vw;
+    display: flex;
+    flex-direction: column; /* This ensures that children are aligned vertically */
+    justify-content: center; /* Aligns content horizontally in the center */
+    align-items: center; /* Aligns content vertically in the center */
+    min-height: 100vh; /* Set the height to full viewport height or adjust as needed */
+}
+.roomHeader{
+    /* color: var(--MainColor); */
+    padding: 1rem;
+    h1 {
+        font-size: 4rem;
+        align-content: center;
+        margin-top: 2rem;
+    }
+}
+
+.roomNumber{
+    color: var(--MainColor);
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.roomType{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.roomButton{
+    background-color: var(--MainColor);
+    width: 10rem;
+    height: 2rem;
+    margin-top: 2rem;
+    outline: var(--MainColor);
+    color: var(--DirtyWhite);
+}
+
+.roomButton:hover{
+    background-color: var(--HoverColor);
+    cursor: pointer;
+}
+
+.roomButtonDiv {
+    display: flex;
+    justify-content: end;
+}
+
+.roomDeets {
+    padding-top: 1rem;
+}
+
+.cardDiv {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}

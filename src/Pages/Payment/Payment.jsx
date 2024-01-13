@@ -2,9 +2,56 @@ import React, { useEffect, useState } from 'react'
 import { Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination} from "@mui/material";
 import './Payment.css'
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 function Payment() {
+    const {brn_id,employee_id} = useParams();
+    const [currentDate, setCurrentDate] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        getCurrentDate();
+      },[])
+      
+    const getCurrentDate = () => {
+
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        
+        const formattedDate = `${year}-${month}-${day}`;
+        setCurrentDate(formattedDate)
+        console.log(currentDate)
+        
+    }
+    const handleCheckOutTrue = async () =>{
+        const brnToUpdate = {
+            brn_id: brn_id,
+            check_out_date: currentDate,
+            status: "CHECKED-OUT"
+        }
+
+        try{
+            const response = await fetch('http://localhost:8080/miancurocho/brn/update', {
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(brnToUpdate)
+            })
+            console.log(brnToUpdate)
+            navigate(`/fd/dashboard/${employee_id}`)
+            }catch(error){
+            //ADD FRONTEND ERROR DISPLAY HERE 
+            console.log('Checkout Error. Please Try again')
+            console.log(error)
+        }
+    }
+
+
     const columns = [
         {id:"date", name:"Date"},
         {id:"details", name:"Details"},
@@ -275,7 +322,7 @@ const [modal, setModal] = useState(false);
                 </div>
                 )}
                 <div className="proceedToPayment">
-                    <button className="proctopay btn ">Pay</button>
+                    <button className="proctopay btn " onClick={handleCheckOutTrue}>Pay</button>
                 </div>
             </div>
         </div>
@@ -284,4 +331,4 @@ const [modal, setModal] = useState(false);
   )
 }
 
-export default Payment
+export default Payment;
